@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Plugboard from './plugboard';
 
 class Enigma extends React.Component {
   constructor(props) {
@@ -6,16 +7,27 @@ class Enigma extends React.Component {
 
     this.state = {
       plaintext: null,
-      ciphertext: null
+      ciphertext: null,
+      steckerPairs: {}
     }
 
     this.onChange = this.onChange.bind(this);
+    this.onSteckerPair = this.onSteckerPair.bind(this);
   }
 
   onChange(field, data) {
     this.setState({
       [field]: data
     });
+  }
+
+  onSteckerPair(letter, partner) {
+    this.setState({
+      steckerPairs: {
+        ...this.state.steckerPairs,
+        [letter]: partner
+      }
+    })
   }
 
   render() {
@@ -27,6 +39,10 @@ class Enigma extends React.Component {
         <textarea
           onChange={(e) => this.onChange('plaintext', e.target.value)}
           placeholder={'Enter message here...'}
+        />
+
+        <Plugboard
+          onChange={this.onSteckerPair}
         />
       </>
     );
