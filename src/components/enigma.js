@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import Tabview from './tabview';
 import Plugboard from './plugboard';
+import TextEntry from './textentry';
 
 class Enigma extends React.Component {
   constructor(props) {
@@ -8,11 +10,17 @@ class Enigma extends React.Component {
     this.state = {
       plaintext: null,
       ciphertext: null,
-      steckerPairs: {}
+      steckerPairs: {},
+      visibleComponent: null
     }
 
     this.onChange = this.onChange.bind(this);
     this.onSteckerPair = this.onSteckerPair.bind(this);
+    this.onChangeTab = this.onChangeTab.bind(this);
+  }
+
+  onChangeTab(t) {
+    this.setState({ visibleComponent: t });
   }
 
   onChange(field, data) {
@@ -33,17 +41,33 @@ class Enigma extends React.Component {
   render() {
 
     console.log('Enigma state: ', this.state);
+    const tabs = {
+      plugboard: 'Plugboard',
+      textentry: 'Text Entry'
+    }
 
     return (
       <>
-        <textarea
-          onChange={(e) => this.onChange('plaintext', e.target.value)}
-          placeholder={'Enter message here...'}
+        <Tabview
+          onChangeTab={this.onChangeTab}
+          tabs={tabs}
         />
+        {
+          this.state.visibleComponent === 'textentry' || !this.state.visibleComponent ?
+          <TextEntry
+            onChange={this.onChange}
+          /> :
+          null
+        }
 
-        <Plugboard
-          onChange={this.onSteckerPair}
-        />
+        {
+          this.state.visibleComponent === 'plugboard' ?
+          <Plugboard
+            onChange={this.onSteckerPair}
+            steckerPairs={this.state.steckerPairs}
+          /> :
+          null
+        }
       </>
     );
   }

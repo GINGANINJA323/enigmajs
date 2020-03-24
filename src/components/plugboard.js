@@ -17,6 +17,7 @@ class Plugboard extends React.Component {
                     <td>{l}</td>
                     <td>
                       <input
+                        value={this.props.steckerPairs[l]}
                         placeholder={'Input Stecker partner.'}
                         onChange={(e) => this.props.onChange(l, e.target.value)}
                       />
