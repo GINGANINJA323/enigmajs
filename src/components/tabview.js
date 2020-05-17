@@ -7,9 +7,9 @@ class Tabview extends React.Component {
         {
           Object.keys(this.props.tabs).map(t => 
               <button
-                label={this.props.tabs[t]}
                 onClick={() => this.props.onChangeTab(t)}
-              />
+              >{this.props.tabs[t]}
+              </button>
             )
         }
       </>

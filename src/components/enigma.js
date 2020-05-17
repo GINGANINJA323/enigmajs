@@ -43,7 +43,9 @@ class Enigma extends React.Component {
     console.log('Enigma state: ', this.state);
     const tabs = {
       plugboard: 'Plugboard',
-      textentry: 'Text Entry'
+      textentry: 'Text Entry',
+      rotors: 'Rotors',
+      reflector: 'Reflector Mode'
     }
 
     return (
@@ -55,6 +57,7 @@ class Enigma extends React.Component {
         {
           this.state.visibleComponent === 'textentry' || !this.state.visibleComponent ?
           <TextEntry
+            value={this.state.plaintext}
             onChange={this.onChange}
           /> :
           null

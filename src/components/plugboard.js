@@ -8,7 +8,12 @@ class Plugboard extends React.Component {
       <>
         <table>
           <thead>
-            <tr></tr>
+            <tr colSpan={2}>
+              <td>
+                <h1>{'Plugboard'}</h1>
+                  <p>{'Enter characters to pair them.'}</p>
+              </td>
+            </tr>
           </thead>
           <tbody>
             {
@@ -20,6 +25,8 @@ class Plugboard extends React.Component {
                         value={this.props.steckerPairs[l]}
                         placeholder={'Input Stecker partner.'}
                         onChange={(e) => this.props.onChange(l, e.target.value)}
+                        maxLength={1}
+                        type={'text'}
                       />
                     </td>
                   </tr>
