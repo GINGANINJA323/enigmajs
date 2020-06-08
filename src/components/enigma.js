@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Tabview from './tabview';
 import Plugboard from './plugboard';
 import TextEntry from './textentry';
