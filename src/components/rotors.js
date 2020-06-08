@@ -23,6 +23,8 @@ class RotorConfig extends React.Component {
 
     const rotors = ['I', 'II', 'III'];
 
+    console.log('Props for RotorConfig: ', this.props.rotors);
+
     return (
       <>
         <h1>{'Rotor Selection'}</h1>
@@ -31,19 +33,19 @@ class RotorConfig extends React.Component {
         <Dropdown
           onClick={(e) => this.onChangeRotor(e.target.value, 0)}
           options={rotors}
-          value={this.state.rotorArray[0]}
+          value={this.props.rotors[0]}
         />
 
         <Dropdown
           onClick={(e) => this.onChangeRotor(e.target.value, 1)}
           options={rotors}
-          value={this.state.rotorArray[1]}
+          value={this.props.rotors[1]}
         />
 
         <Dropdown
           onClick={(e) => this.onChangeRotor(e.target.value, 2)}
           options={rotors}
-          value={this.state.rotorArray[2]}
+          value={this.props.rotors[2]}
         />
 
         <button

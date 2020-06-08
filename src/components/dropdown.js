@@ -6,7 +6,14 @@ class Dropdown extends React.Component {
     return (
       <select>
         {
-          this.props.options.map(o => <option value={o} onClick={this.props.onClick}>{o}</option>)
+          this.props.options.map(o =>
+            <option
+              value={o}
+              selected={o === this.props.value}
+              onClick={this.props.onClick}>
+                {o}
+            </option>
+          )
         }
       </select>
     );
