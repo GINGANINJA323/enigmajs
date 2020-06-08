@@ -2,6 +2,7 @@ import React from 'react';
 import Tabview from './tabview';
 import Plugboard from './plugboard';
 import TextEntry from './textentry';
+import Switch from './switch';
 
 class Enigma extends React.Component {
   constructor(props) {
@@ -11,6 +12,7 @@ class Enigma extends React.Component {
       plaintext: null,
       ciphertext: null,
       steckerPairs: {},
+      reflector: 'a',
       visibleComponent: null
     }
 
@@ -68,6 +70,15 @@ class Enigma extends React.Component {
           <Plugboard
             onChange={this.onSteckerPair}
             steckerPairs={this.state.steckerPairs}
+          /> :
+          null
+        }
+
+        {
+          this.state.visibleComponent === 'reflector' ?
+          <Switch
+            onChange={this.onChange}
+            value={this.state.reflector}
           /> :
           null
         }
