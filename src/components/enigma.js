@@ -3,6 +3,7 @@ import Tabview from './tabview';
 import Plugboard from './plugboard';
 import TextEntry from './textentry';
 import Switch from './switch';
+import RotorConfig from './rotors';
 
 class Enigma extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Enigma extends React.Component {
       ciphertext: null,
       steckerPairs: {},
       reflector: 'a',
+      rotors: ['I', 'II', 'III'],
       visibleComponent: null
     }
 
@@ -78,7 +80,16 @@ class Enigma extends React.Component {
           this.state.visibleComponent === 'reflector' ?
           <Switch
             onChange={this.onChange}
-            value={this.state.reflector}
+            value={this.state.reflector} 
+          /> :
+          null
+        }
+
+        { 
+          this.state.visibleComponent === 'rotors' ?
+          <RotorConfig
+            onChange={this.onChange}
+            rotors={this.state.rotors}
           /> :
           null
         }
