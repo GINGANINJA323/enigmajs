@@ -8,21 +8,21 @@ class Switch extends React.Component {
         <div>
           <input
             type={'radio'}
-            checked={this.props.value === 'a'}
+            checked={this.props.value === 'b'}
             onClick={(e) => this.props.onChange('reflector', e.target.value)}
-            value='a'
+            value='b'
           />
-          <label>{'A'}</label>
+          <label>{'Wide B'}</label>
         </div>
 
         <div>
           <input
             type={'radio'}
-            checked={this.props.value === 'b'}
+            checked={this.props.value === 'c'}
             onClick={(e) => this.props.onChange('reflector', e.target.value)}
-            value='b'
+            value='c'
           />
-          <label>{'B'}</label>
+          <label>{'Wide C'}</label>
         </div>
       </>
     );
