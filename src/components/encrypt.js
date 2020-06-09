@@ -1,29 +1,55 @@
 
 const plugConv = (charArray, plugboard) => {
-  console.log('plugConv started with: ', charArray, plugboard);
-  return charArray.map(c => {
-    if (c === ' ') {
-      return c;
+  return charConv(charArray, Object.values(plugboard));
+};
+
+const charConv = (text, key) => {
+  console.log('charConv called with: ', text, key);
+  const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+  return text.map(c => {
+    if (c === ' ' || c === '.') {
+      return 'x';
     }
 
     const letter = c.toUpperCase();
+    const letterIndex = alphabet.indexOf(letter);
 
-    const alpha = Object.keys(plugboard);
-    const translator = Object.values(plugboard);
+    if (!letterIndex) {
+      return letter;
+    }
 
-    const transIndex = alpha.indexOf(letter);
-    return translator[transIndex];
-  });
+    return key[letterIndex];
+  })
 }
 
-const encrypt = (text, pairs, rotors, refPos) => {
+const reflector = (refVal, text) => {
+
+  const b = 'YRUHQSLDPXNGOKMIEBFZCWVJAT';
+  const c = 'FVPJIAOYEDRZXWGCTKUQSBNMHL';
+
+  const refText = refVal === 'b' ?
+    charConv(text, b.split('')) :
+    charConv(text, c.split(''));
+
+  return refText;
+};
+
+const encrypt = (text, pairs, rotors, refVal) => {
   const textArray = text.split('');
 
-  const plugText = plugConv(textArray, pairs);
+  //Convert plaintext into plugtext through plugboard.
+  const plugTextIn = plugConv(textArray, pairs);
 
-  console.log('Text through plugboard: ', plugText);
+  const refText = reflector(refVal, plugTextIn);
 
-  return text;
+  console.log('Reflected: ', refText);
+
+  const resArray = [];
+  //Convert enc data to plugtext again before output.
+  const resultText = plugConv(resArray, pairs);
+
+  return resultText;
 };
 
 export default encrypt;
