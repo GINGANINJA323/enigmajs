@@ -10,7 +10,7 @@ class Enigma extends React.Component {
     super(props);
 
     this.state = {
-      plaintext: null,
+      plaintext: '',
       ciphertext: null,
       steckerPairs: {},
       reflector: 'a',
@@ -33,6 +33,22 @@ class Enigma extends React.Component {
     });
   }
 
+  checkData() {
+    console.log('Check data started.');
+
+    const pairsValid = Object.values(this.state.steckerPairs).length === 26;
+    const rotorsValid = this.state.rotors.length === 3;
+    const refValid = this.state.reflector.length === 1;
+    const ptValid = this.state.plaintext.length > 0;
+
+    if (!pairsValid || !rotorsValid || !refValid || !ptValid) {
+      console.log('Validation failed.');
+      return true;
+    };
+
+    return false;
+  }
+
   onSteckerPair(letter, partner) {
     this.setState({
       steckerPairs: {
@@ -43,7 +59,6 @@ class Enigma extends React.Component {
   }
 
   render() {
-
     console.log('Enigma state: ', this.state);
     const tabs = {
       plugboard: 'Plugboard',
@@ -93,6 +108,12 @@ class Enigma extends React.Component {
           /> :
           null
         }
+
+        <button
+          disabled={this.checkData()}
+          onClick={this.getEncText}>
+            {'Encrypt!'}
+        </button>
       </>
     );
   }
