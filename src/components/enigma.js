@@ -4,6 +4,7 @@ import Plugboard from './plugboard';
 import TextEntry from './textentry';
 import Switch from './switch';
 import RotorConfig from './rotors';
+import encrypt from './encrypt';
 
 class Enigma extends React.Component {
   constructor(props) {
@@ -21,10 +22,15 @@ class Enigma extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.onSteckerPair = this.onSteckerPair.bind(this);
     this.onChangeTab = this.onChangeTab.bind(this);
+    this.getEncText = this.getEncText.bind(this);
   }
 
   onChangeTab(t) {
     this.setState({ visibleComponent: t });
+  }
+
+  getEncText() {
+    encrypt(this.state.plaintext, this.state.steckerPairs, this.state.rotors, this.state.reflector);
   }
 
   onChange(field, data) {
@@ -65,7 +71,7 @@ class Enigma extends React.Component {
       textentry: 'Text Entry',
       rotors: 'Rotors',
       reflector: 'Reflector Mode'
-    }
+    };
 
     return (
       <>
