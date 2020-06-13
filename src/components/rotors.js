@@ -7,49 +7,76 @@ class RotorConfig extends React.Component {
     super(props);
 
     this.state = {
-      rotorArray: props.rotors || ['I', 'II', 'III']
+      rotorArray: props.rotors || ['I', 'II', 'III'],
+      rotorStart: props.rotorStart || [0, 0, 0]
     };
   }
 
-  onChangeRotor(value, pos) {
-    let rotorArray = this.state.rotorArray;
+  handleValueChange(field, value, pos) {
+    let array = this.state[field];
 
-    rotorArray[pos] = value;
+    array[pos] = value;
 
-    this.setState({ rotorArray });
+    this.setState({ [field]: array });
+  }
+
+  handleChangeRotors() {
+    this.props.onChange('rotors', this.state.rotorArray);
+    this.props.onChange('rotorStart', this.state.rotorStart);
   }
 
   render() {
 
     const rotors = ['I', 'II', 'III'];
 
-    console.log('Props for RotorConfig: ', this.props.rotors);
+    console.log('Props for RotorConfig: ', this.props);
 
     return (
       <>
         <h1>{'Rotor Selection'}</h1>
-        <p>{'Select the three rotors you would like to encrypt with.'}</p>
+        <p>{'Select the three rotors you would like to encrypt with, as well as their respective start positions.'}</p>
 
         <Dropdown
-          onClick={(e) => this.onChangeRotor(e.target.value, 0)}
+          onClick={(e) => this.handleValueChange('rotorArray', e.target.value, 0)}
           options={rotors}
           value={this.props.rotors[0]}
         />
+        <input
+          type={'number'}
+          min={0}
+          max={26}
+          value={this.state.rotorStart[0]}
+          onChange={(e) => this.handleValueChange('rotorStart', e.target.value, 0)}
+        />
 
         <Dropdown
-          onClick={(e) => this.onChangeRotor(e.target.value, 1)}
+          onClick={(e) => this.handleValueChange('rotorArray', e.target.value, 1)}
           options={rotors}
           value={this.props.rotors[1]}
         />
+        <input
+          type={'number'}
+          min={0}
+          max={26}
+          value={this.state.rotorStart[1]}
+          onChange={(e) => this.handleValueChange('rotorStart', e.target.value, 1)}
+        />
 
         <Dropdown
-          onClick={(e) => this.onChangeRotor(e.target.value, 2)}
+          onClick={(e) => this.handleValueChange('rotorArray', e.target.value, 2)}
           options={rotors}
           value={this.props.rotors[2]}
         />
+        <input
+          type={'number'}
+          min={0}
+          max={26}
+          value={this.state.rotorStart[2]}
+          onChange={(e) => this.handleValueChange('rotorStart', e.target.value, 2)}
+        />
 
         <button
-          onClick={() => this.props.onChange('rotors', this.state.rotorArray)}
+          onClick={this.handleChangeRotors}
         >{'Set'}</button>
       </>
     );
