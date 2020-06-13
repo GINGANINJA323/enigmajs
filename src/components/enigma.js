@@ -14,7 +14,7 @@ class Enigma extends React.Component {
       plaintext: '',
       ciphertext: null,
       steckerPairs: {},
-      reflector: 'a',
+      reflector: 'b',
       rotors: ['I', 'II', 'III'],
       visibleComponent: null
     }
