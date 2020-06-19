@@ -34,12 +34,11 @@ const charConv = (char, key) => {
   return key[letterIndex];
 }
 
-const rotorConv = (rotors, text) =>  {
-  console.log('rotorConv received: ', rotors, text);
+const rotorConv = (rotors, startPos, text) =>  {
+  console.log('rotorConv received: ', rotors, text, rotorSelection);
   const selectedRotors = rotors.map(r => rotorSelection[r].split(''));
 
-  let count = 0;
-  let count2 = 0;
+  let count = startPos;
   let resultText = [];
 
   let r1 = rotator(selectedRotors[0], 0);
@@ -49,28 +48,28 @@ const rotorConv = (rotors, text) =>  {
   text.forEach(l => {
 
     r1 = rotator(r1, 1);
+    count[0]++
 
     if (count === 26) {
       r2 = rotator(r2, 1);
       count = 0
-      count2++;
+      count[1]++;
     }
 
-    if (count2 === 26) {
+    if (count[1] === 26) {
       r3 = rotator(r3, 1);
-      count2 = 0;
+      count[1] = 0;
+      count[2]++;
     }
 
     const first = charConv(l, r1);
     const second = charConv(first, r2);
     const final = charConv(second, r3);
 
-
     resultText.push(final);
-    count++;
   });
 
-  return resultText;
+  return {resultText, count};
 
 };
 
@@ -86,20 +85,22 @@ const reflector = (refVal, text) => {
   return refText;
 };
 
-const encrypt = (text, pairs, rotors, refVal) => {
+const encrypt = (text, pairs, rotors, rStartPos, refVal) => {
   const textArray = text.split('');
 
   //Convert plaintext into plugtext through plugboard.
   const plugTextIn = plugConv(textArray, pairs);
 
-  const rotorTextIn = rotorConv(rotors, plugTextIn);
+  const rotorTextIn = rotorConv(rotors, rStartPos, plugTextIn);
 
-  const refText = reflector(refVal, rotorTextIn);
+  const refText = reflector(refVal, rotorTextIn.resultText);
 
-  const rotorTextOut = rotorConv(rotors.reverse(), refText);
+  const rotorTextOut = rotorConv(rotors.reverse(), rotorTextIn.count.reverse(), refText);
+
   rotors.reverse();
+  rotorTextIn.count.reverse();
   //Convert enc data to plugtext again before output.
-  const resultText = plugConv(rotorTextOut, pairs);
+  const resultText = plugConv(rotorTextOut.resultText, pairs);
 
   console.log(`Text ${text} encrypted to ${resultText.join(',')}.`);
 

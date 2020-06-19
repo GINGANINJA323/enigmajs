@@ -10,6 +10,8 @@ class RotorConfig extends React.Component {
       rotorArray: props.rotors || ['I', 'II', 'III'],
       rotorStart: props.rotorStart || [0, 0, 0]
     };
+
+    this.handleChangeRotors = this.handleChangeRotors.bind(this);
   }
 
   handleValueChange(field, value, pos) {

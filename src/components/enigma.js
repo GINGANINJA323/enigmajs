@@ -31,7 +31,7 @@ class Enigma extends React.Component {
   }
 
   getEncText() {
-    encrypt(this.state.plaintext, this.state.steckerPairs, this.state.rotors, this.state.reflector);
+    encrypt(this.state.plaintext, this.state.steckerPairs, this.state.rotors, this.state.rotorStart, this.state.reflector);
   }
 
   onChange(field, data) {
