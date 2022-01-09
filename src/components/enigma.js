@@ -40,12 +40,11 @@ class Enigma extends React.Component {
   }
 
   checkData() {
-    const pairsValid = Object.values(this.state.steckerPairs).length === 26;
     const rotorsValid = this.state.rotors.length === 3;
     const refValid = this.state.reflector.length === 1;
     const ptValid = this.state.plaintext.length > 0;
 
-    if (!pairsValid || !rotorsValid || !refValid || !ptValid) {
+    if (!rotorsValid || !refValid || !ptValid) {
       console.log('Validation failed.');
       return true;
     };

@@ -1,7 +1,16 @@
 const rotorSelection = require('./rotorSelect.json');
 
 const plugConv = (charArray, plugboard) => {
-  return arrayConv(charArray, Object.values(plugboard));
+  return charArray.map(character => {
+    const upperChar = character.toUpperCase();
+    if (Object.keys(plugboard).includes(upperChar)) {
+      return plugboard[upperChar];
+    } if (Object.values(plugboard).includes(upperChar)) {
+      return Object.keys(plugboard)[Object.values(plugboard).indexOf(upperChar)];
+    } else {
+      return upperChar;
+    }
+  });
 };
 
 const rotator = (array, offset) => {
@@ -10,12 +19,6 @@ const rotator = (array, offset) => {
 
   return array;
 }
-
-const arrayConv = (text, key) => {
-  return text.map(c => {
-    return charConv(c, key);
-  })
-};
 
 const charConv = (char, key) => {
   const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -74,28 +77,37 @@ const rotorConv = (rotors, startPos, text) =>  {
 };
 
 const reflector = (refVal, text) => {
+  const reflectors = {
+    b: 'YRUHQSLDPXNGOKMIEBFZCWVJAT',
+    c: 'FVPJIAOYEDRZXWGCTKUQSBNMHL',
+    tb: 'ENKQAUYWJICOPBLMDXZVFTHRGS',
+    tc: 'RDOBJNTKVEHMLFCWZAXGYIPSUQ'
+  }
 
-  const b = 'YRUHQSLDPXNGOKMIEBFZCWVJAT';
-  const c = 'FVPJIAOYEDRZXWGCTKUQSBNMHL';
-
-  const refText = refVal === 'b' ?
-    arrayConv(text, b.split('')) :
-    arrayConv(text, c.split(''));
-
-  return refText;
+  return reflectors[refVal];
 };
 
 const encrypt = (text, pairs, rotors, rStartPos, refVal) => {
   const textArray = text.split('');
 
+  console.log('TextArray: (in)', textArray);
+
   //Convert plaintext into plugtext through plugboard.
   const plugTextIn = plugConv(textArray, pairs);
 
+  console.log('PlugConv: ', plugTextIn);
+
   const rotorTextIn = rotorConv(rotors, rStartPos, plugTextIn);
+
+  console.log('Rotors: ', rotorTextIn);
 
   const refText = reflector(refVal, rotorTextIn.resultText);
 
+  console.log('reflected: ', refText);
+
   const rotorTextOut = rotorConv(rotors.reverse(), rotorTextIn.count.reverse(), refText);
+
+  console.log('Rotors (out): ', rotorTextOut);
 
   rotors.reverse();
   rotorTextIn.count.reverse();
