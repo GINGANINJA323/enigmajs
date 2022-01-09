@@ -100,7 +100,7 @@ class Enigma extends React.Component {
           <RotorConfig
             onChange={this.onChange}
             rotors={this.state.rotors}
-            rotorStart={[0, 0, 0]}
+            rotorStart={this.state.rotorStart}
           /> :
           null
         }
