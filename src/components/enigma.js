@@ -21,7 +21,6 @@ class Enigma extends React.Component {
     }
 
     this.onChange = this.onChange.bind(this);
-    this.onSteckerPair = this.onSteckerPair.bind(this);
     this.onChangeTab = this.onChangeTab.bind(this);
     this.getEncText = this.getEncText.bind(this);
   }
@@ -41,8 +40,6 @@ class Enigma extends React.Component {
   }
 
   checkData() {
-    console.log('Check data started.');
-
     const pairsValid = Object.values(this.state.steckerPairs).length === 26;
     const rotorsValid = this.state.rotors.length === 3;
     const refValid = this.state.reflector.length === 1;
@@ -54,15 +51,6 @@ class Enigma extends React.Component {
     };
 
     return false;
-  }
-
-  onSteckerPair(letter, partner) {
-    this.setState({
-      steckerPairs: {
-        ...this.state.steckerPairs,
-        [letter]: partner
-      }
-    })
   }
 
   render() {
@@ -92,8 +80,9 @@ class Enigma extends React.Component {
         {
           this.state.visibleComponent === 'plugboard' ?
           <Plugboard
-            onChange={this.onSteckerPair}
-            steckerPairs={this.state.steckerPairs}
+            bindings={this.state.steckerPairs}
+            onChangeBindings={(bindings) => this.setState({ steckerPairs: { ...this.state.steckerPairs, ...bindings }})}
+            resetPairs={() => this.setState({ steckerPairs: {}})}
           /> :
           null
         }
