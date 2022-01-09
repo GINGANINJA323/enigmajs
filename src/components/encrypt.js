@@ -132,10 +132,21 @@ const reflector = (refVal, char, cb) => {
 };
 
 const rotator = (array, offset) => {
-  const rotOffset = array.slice(offset);
-  array.push(rotOffset);
+  if (offset === 0) {
+    return array;
+  }
 
-  return array;
+  const newArr = [...array];
+
+  for (let i = 0; i < offset; i++) { // Pull elements off the end of the array.
+    newArr.pop();
+  }
+
+  const popped = array.slice(-offset);
+
+  console.log(popped, newArr);
+
+  return ([...popped, ...newArr]);
 }
 
 let rotor1;
@@ -148,32 +159,45 @@ const rotor = (inputChar, cb) => {
   const sRotor = rotator(rotorSelection[rotor2.type].split(''), rotor2.pos);
   const tRotor = rotator(rotorSelection[rotor3.type].split(''), rotor3.pos);
 
+  console.log('Rotors primed: ', fRotor, sRotor, tRotor);
+
   // Create alphabet mapping
   const fRotorMap = alphabet.reduce((prev, curr, index) => ({ ...prev, [curr]: fRotor[index] }), {});
   const sRotorMap = alphabet.reduce((prev, curr, index) => ({ ...prev, [curr]: sRotor[index] }), {});
   const tRotorMap = alphabet.reduce((prev, curr, index) => ({ ...prev, [curr]: tRotor[index] }), {});
 
+  console.log('Rotor maps: ', fRotorMap, sRotorMap, tRotorMap);
+
   // Use plugConv to get rotated value
   return plugConv(inputChar, fRotorMap, (char) => {
     rotor1.pos = rotor1.pos + 1; // Advance first rotor position
+
+    console.log('Rotors in use 1: ', fRotor, sRotor, tRotor);
      
     if (rotor1.pos > 26) { // If rotor 1 has performed a full rotation
       rotor1.pos = 0; // Reset back to the start.
       rotor2.pos = rotor2.pos + 1; // Advance rotor 2.
 
+      console.log('Rotors in use 2: ', fRotor, sRotor, tRotor);
+
       if (rotor2.pos > 26) { // If rotor2 has now performed a full rotation
         rotor2.pos = 0; // Reset back to the start;
         rotor3.pos = rotor3.pos + 1; // Advance rotor 3.
 
+        console.log('Rotors in use 3: ', fRotor, sRotor, tRotor);
+
         if (rotor3.pos > 26) {
           rotor3.pos = 0;
+          console.log('Rotors in use 4: ', fRotor, sRotor, tRotor);
         }
       }
     }
 
     return plugConv(char, sRotorMap, (sChar) => {
+      console.log('Rotors second conversion: ', fRotor, sRotor, tRotor);
       return plugConv(sChar, tRotorMap, (tChar) => {
-         return cb(tChar);
+        console.log('Rotors third conversion: ', fRotor, sRotor, tRotor);
+        return cb(tChar);
       });
     });
   });
@@ -187,17 +211,11 @@ const encrypt = (text, pairs, rotors, rStartPos, refVal) => {
   rotor3 = { type: rotors[2], pos: rStartPos[2] };
 
   const textArray = textIn.map(char => {
-    console.log('1: ', char);
     return plugConv(char, pairs, (plugChar) => {
-      console.log('2: ', plugChar);
       return rotor(plugChar, (rotorChar) => {
-        console.log('3: ', rotorChar);
         return reflector(refVal, rotorChar, (reflectedChar) => {
-          console.log('4: ', reflectedChar);
           return rotor(reflectedChar, (reRotorChar) => {
-            console.log('5: ', reRotorChar);
             return plugConv(reRotorChar, pairs, (finalChar) => {
-              console.log('6: ', finalChar);
               return finalChar;
             });
           });
