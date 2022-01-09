@@ -30,6 +30,7 @@ class Plugboard extends React.Component {
 
     this.setLetter = this.setLetter.bind(this);
     this.respondLetter = this.respondLetter.bind(this);
+    this.letterDisabled = this.letterDisabled.bind(this);
   }
 
   setLetter(letter) {
@@ -50,6 +51,10 @@ class Plugboard extends React.Component {
     this.setState({ selector: null });
   }
 
+  letterDisabled(letter) {
+    return Object.keys(this.props.bindings).includes(letter) || Object.values(this.props.bindings).includes(letter);
+  }
+
   render() {
     console.log(this.state);
     return (
@@ -57,7 +62,7 @@ class Plugboard extends React.Component {
         <div style={styles.row}>
           {
             alphabet.map((letter) => (
-              <button disabled={Object.keys(this.props.bindings).includes(letter)} style={styles.button} onClick={() => this.setLetter(letter)}>{letter}</button>
+              <button disabled={this.letterDisabled(letter)} style={styles.button} onClick={() => this.setLetter(letter)}>{letter}</button>
             ))
           }
           <button style={styles.button} disabled={!Object.keys(this.props.bindings).length} onClick={this.props.resetPairs}>Reset Pairings</button>
@@ -66,7 +71,7 @@ class Plugboard extends React.Component {
         <div style={styles.row}>
           {
             alphabet.map((letter) => (
-              <button disabled={!this.state.selector || Object.values(this.props.bindings).includes(letter)} style={styles.button} onClick={() => this.respondLetter(letter)}>{letter}</button>
+              <button disabled={!this.state.selector || this.letterDisabled(letter)} style={styles.button} onClick={() => this.respondLetter(letter)}>{letter}</button>
             ))
           }
         </div>

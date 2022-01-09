@@ -1,5 +1,6 @@
 import React from 'react';
 import Dropdown from './dropdown';
+const rotorSelection = require('./rotorSelect.json');
 
 
 class RotorConfig extends React.Component {
@@ -28,10 +29,7 @@ class RotorConfig extends React.Component {
   }
 
   render() {
-
-    const rotors = ['I', 'II', 'III'];
-
-    console.log('Props for RotorConfig: ', this.props);
+    const rotors = rotorSelection;
 
     return (
       <>
@@ -40,7 +38,7 @@ class RotorConfig extends React.Component {
 
         <Dropdown
           onClick={(e) => this.handleValueChange('rotorArray', e.target.value, 0)}
-          options={rotors}
+          options={Object.keys(rotors)}
           value={this.props.rotors[0]}
         />
         <input
@@ -48,12 +46,12 @@ class RotorConfig extends React.Component {
           min={0}
           max={26}
           value={this.state.rotorStart[0]}
-          onChange={(e) => this.handleValueChange('rotorStart', e.target.value, 0)}
+          onChange={(e) => this.handleValueChange('rotorStart', Number(e.target.value), 0)}
         />
 
         <Dropdown
           onClick={(e) => this.handleValueChange('rotorArray', e.target.value, 1)}
-          options={rotors}
+          options={Object.keys(rotors)}
           value={this.props.rotors[1]}
         />
         <input
@@ -61,12 +59,12 @@ class RotorConfig extends React.Component {
           min={0}
           max={26}
           value={this.state.rotorStart[1]}
-          onChange={(e) => this.handleValueChange('rotorStart', e.target.value, 1)}
+          onChange={(e) => this.handleValueChange('rotorStart', Number(e.target.value), 1)}
         />
 
         <Dropdown
           onClick={(e) => this.handleValueChange('rotorArray', e.target.value, 2)}
-          options={rotors}
+          options={Object.keys(rotors)}
           value={this.props.rotors[2]}
         />
         <input
@@ -74,7 +72,7 @@ class RotorConfig extends React.Component {
           min={0}
           max={26}
           value={this.state.rotorStart[2]}
-          onChange={(e) => this.handleValueChange('rotorStart', e.target.value, 2)}
+          onChange={(e) => this.handleValueChange('rotorStart', Number(e.target.value), 2)}
         />
 
         <button
