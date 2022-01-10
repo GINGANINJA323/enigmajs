@@ -5,6 +5,7 @@ import TextEntry from './textentry';
 import Switch from './switch';
 import RotorConfig from './rotors';
 import encrypt from './encrypt';
+import Helmet from 'react-helmet';
 
 class Enigma extends React.Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class Enigma extends React.Component {
       reflector: 'b',
       rotorStart: [0, 0, 0],
       rotors: ['I', 'II', 'III'],
-      visibleComponent: null
+      visibleComponent: 'textentry'
     }
 
     this.onChange = this.onChange.bind(this);
@@ -63,6 +64,9 @@ class Enigma extends React.Component {
 
     return (
       <>
+        <Helmet>
+          <title>{`EnigmaJS - ${tabs[this.state.visibleComponent || 'Text Entry']}`}</title>
+        </Helmet>
         <Tabview
           onChangeTab={this.onChangeTab}
           tabs={tabs}
