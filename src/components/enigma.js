@@ -18,6 +18,7 @@ class Enigma extends React.Component {
       reflector: 'b',
       rotorStart: [0, 0, 0],
       rotors: ['I', 'II', 'III'],
+      rotorRing: ['A', 'A', 'A'],
       visibleComponent: 'textentry'
     }
 
@@ -31,7 +32,7 @@ class Enigma extends React.Component {
   }
 
   getEncText() {
-    encrypt(this.state.plaintext, this.state.steckerPairs, this.state.rotors, this.state.rotorStart, this.state.reflector);
+    encrypt(this.state.plaintext, this.state.steckerPairs, this.state.rotors, this.state.rotorStart, this.state.rotorRing, this.state.reflector);
   }
 
   onChange(field, data) {
