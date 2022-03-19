@@ -28,7 +28,6 @@ class RotorConfig extends React.Component {
   handleChangeRotors() {
     this.props.onChange('rotors', this.state.rotorArray);
     this.props.onChange('rotorStart', this.state.rotorStart);
-    this.props.onChange('rotorRing', this.state.rotorRing);
   }
 
   render() {
@@ -51,11 +50,6 @@ class RotorConfig extends React.Component {
           value={this.state.rotorStart[0]}
           onChange={(e) => this.handleValueChange('rotorStart', Number(e.target.value), 0)}
         />
-        <Dropdown
-          onClick={(e) => this.handleValueChange('rotorRing', e.target.value, 0)}
-          options={alphabet}
-          value={this.props.rotorsRing[0]}
-        />
 
         <Dropdown
           onClick={(e) => this.handleValueChange('rotorArray', e.target.value, 1)}
@@ -69,11 +63,6 @@ class RotorConfig extends React.Component {
           value={this.state.rotorStart[1]}
           onChange={(e) => this.handleValueChange('rotorStart', Number(e.target.value), 1)}
         />
-        <Dropdown
-          onClick={(e) => this.handleValueChange('rotorRing', e.target.value, 1)}
-          options={alphabet}
-          value={this.props.rotorsRing[1]}
-        />
 
         <Dropdown
           onClick={(e) => this.handleValueChange('rotorArray', e.target.value, 2)}
@@ -86,11 +75,6 @@ class RotorConfig extends React.Component {
           max={26}
           value={this.state.rotorStart[2]}
           onChange={(e) => this.handleValueChange('rotorStart', Number(e.target.value), 2)}
-        />
-        <Dropdown
-          onClick={(e) => this.handleValueChange('rotorRing', e.target.value, 2)}
-          options={alphabet}
-          value={this.props.rotorsRing[2]}
         />
 
         <button
