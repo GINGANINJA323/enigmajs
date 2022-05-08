@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Tabview from './tabview';
+import TabView from './tabview';
 import Plugboard from './plugboard';
 import TextEntry from './textentry';
 import Switch from './switch';
@@ -16,11 +16,11 @@ const Enigma = (): JSX.Element => {
   const [rotors, setRotors] = React.useState(['I', 'II', 'III']);
   const [visibleComponent, setVisibleComponent] = React.useState('textentry');
 
-  const getCiphertext = () => {
+  const getCiphertext = (): void => {
     encrypt(plaintext, steckerPairs, rotors, rotorStart, reflector);
   }
 
-  const checkData = () => {
+  const checkData = (): boolean => {
     const rotorsValid = rotors.length === 3;
     const refValid = reflector.length === 1;
     const ptValid = plaintext.length > 0;
@@ -46,7 +46,7 @@ const Enigma = (): JSX.Element => {
       <Helmet>
         <title>{`EnigmaJS - ${tabs[visibleComponent || 'Text Entry']}`}</title>
       </Helmet>
-      <Tabview
+      <TabView
         onChangeTab={setVisibleComponent}
         tabs={tabs}
       />

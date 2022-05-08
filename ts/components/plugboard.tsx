@@ -46,8 +46,6 @@ const Plugboard = (props: PlugboardProps): JSX.Element => {
     return Object.keys(props.bindings).includes(letter) || Object.values(props.bindings).includes(letter);
   }
 
-  console.log('Plugboard: ', selector, props);
-
   return (
     <div>
       <div style={styles.row}>
