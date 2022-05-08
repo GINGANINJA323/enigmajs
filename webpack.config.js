@@ -8,7 +8,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(tsx|js)?$/,
+        test: /\.(tsx|ts)?$/,
         exclude: /(node_modules)/,
         loader: "babel-loader",
         options: { presets: ["@babel/env", "@babel/preset-typescript"] }

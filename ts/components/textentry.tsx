@@ -7,11 +7,15 @@ interface TextEntryProps {
 
 const TextEntry = (props: TextEntryProps): JSX.Element => {
   return (
-    <textarea
-      value={props.value}
-      onChange={(e) => props.onChange(e.target.value)}
-      placeholder={'Enter message here...'}
-    />
+    <>
+      <h2>{'Text Entry'}</h2>
+      <p>{'Enter your plaintext message.'}</p>
+      <textarea
+        value={props.value}
+        onChange={(e) => props.onChange(e.target.value)}
+        placeholder={'Enter message here...'}
+      />
+    </>
   )
 }
 

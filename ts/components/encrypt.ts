@@ -1,6 +1,5 @@
 const rotorSelection = require('./rotorSelect.json');
-
-const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+import { alphabet, reflectors } from "./utils/utils";
 
 const plugConv = (char, plugboard, cb) => {
   const upperChar = char.toUpperCase();
@@ -13,14 +12,7 @@ const plugConv = (char, plugboard, cb) => {
   }
 };
 
-const reflector = (refVal, char, cb) => {
-  const reflectors = {
-    b: 'YRUHQSLDPXNGOKMIEBFZCWVJAT',
-    c: 'FVPJIAOYEDRZXWGCTKUQSBNMHL',
-    tb: 'ENKQAUYWJICOPBLMDXZVFTHRGS',
-    tc: 'RDOBJNTKVEHMLFCWZAXGYIPSUQ'
-  }
-
+const reflector = (refVal: string, char: string, cb: any) => {
   const selectedReflector = reflectors[refVal].split('');
 
   const reflectorMap = alphabet.reduce((prev, curr, index) => ({ ...prev, [curr]: selectedReflector[index] }), {});
