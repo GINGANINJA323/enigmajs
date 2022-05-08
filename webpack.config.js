@@ -1,0 +1,28 @@
+const path = require("path");
+const webpack = require("webpack");
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
+module.exports = {
+  entry: "./ts/index.tsx",
+  mode: "development",
+  module: {
+    rules: [
+      {
+        test: /\.(tsx|js)?$/,
+        exclude: /(node_modules)/,
+        loader: "babel-loader",
+        options: { presets: ["@babel/env", "@babel/preset-typescript"] }
+      },
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
+      }
+    ]
+  },
+  resolve: { extensions: [".ts", ".js", ".tsx"] },
+  output: {
+    path: path.resolve(__dirname, "dist/"),
+    publicPath: "/dist/",
+    filename: "bundle.js"
+  }
+};
