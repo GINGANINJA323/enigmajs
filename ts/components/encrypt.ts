@@ -35,6 +35,17 @@ const rotator = (array, offset) => {
   return alphabet.reduce((prev, curr, index) => ({ ...prev, [curr]: newArr[index] }), {});
 }
 
+const rotorFlip = (rotor) => {
+  // Fn to do a kv swap on rotors for the return trip.
+
+  const newObj = {};
+  Object.keys(rotor).forEach((k) => newObj[rotor[k]] = k);
+
+  console.log('Flipped rotor: ', newObj);
+
+  return newObj;
+}
+
 let rotor1;
 let rotor2;
 let rotor3;
@@ -47,41 +58,45 @@ const rotor = (inputChar, reversed, cb) => {
 
   console.log('Rotor maps for letter: ', inputChar, rotor1Map, rotor2Map, rotor3Map);
 
+  console.log(rotorFlip(rotor1Map));
+
   let newVal;
-  substituteChar(inputChar, reversed ? rotor3Map : rotor1Map,
-    (secondChar) => substituteChar(secondChar, rotor2Map,
-      (thirdChar) => substituteChar(thirdChar, reversed ? rotor1Map : rotor3Map,
+  substituteChar(inputChar, reversed ? rotorFlip(rotor3Map) : rotor1Map,
+    (secondChar) => substituteChar(secondChar, reversed ? rotorFlip(rotor2Map) : rotor2Map,
+      (thirdChar) => substituteChar(thirdChar, reversed ? rotorFlip(rotor1Map) : rotor3Map,
         (final) => newVal = final
         )
       )
     );
 
-  rotor1.pos++;
-  rotor2.pos++;
-  rotor3.pos++;
-
-  if (rotor1.pos === 26) {
-    rotor1.pos = 0;
-    rotor1.globalRotations++
-  }
-
-  if (rotor2.pos === 26) {
-    rotor2.pos = 0;
-    rotor2.globalRotations++;
-  }
-
-  if (rotor1.globalRotations > 0) {
-    rotor1.globalRotations = 0;
+  if (!reversed) {
+    rotor1.pos++;
     rotor2.pos++;
-  }
-
-  if (rotor3.pos === 26) {
-    rotor3.pos = 0;
-  }
-
-  if (rotor2.globalRotations > 0) {
-    rotor2.globalRotations = 0;
     rotor3.pos++;
+  
+    if (rotor1.pos === 26) {
+      rotor1.pos = 0;
+      rotor1.globalRotations++
+    }
+  
+    if (rotor2.pos === 26) {
+      rotor2.pos = 0;
+      rotor2.globalRotations++;
+    }
+  
+    if (rotor1.globalRotations > 0) {
+      rotor1.globalRotations = 0;
+      rotor2.pos++;
+    }
+  
+    if (rotor3.pos === 26) {
+      rotor3.pos = 0;
+    }
+  
+    if (rotor2.globalRotations > 0) {
+      rotor2.globalRotations = 0;
+      rotor3.pos++;
+    }
   }
 
   return newVal;
