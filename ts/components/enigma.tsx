@@ -17,7 +17,7 @@ const Enigma = (): JSX.Element => {
   const [visibleComponent, setVisibleComponent] = React.useState('textentry');
 
   const getCiphertext = (): void => {
-    encrypt(plaintext, steckerPairs, rotors, rotorStart, reflector);
+    setCiphertext(encrypt(plaintext, steckerPairs, rotors, rotorStart, reflector));
   }
 
   const checkData = (): boolean => {
@@ -33,7 +33,7 @@ const Enigma = (): JSX.Element => {
     return false;
   }
 
-  console.log('Enigma state: ', plaintext, ciphertext, steckerPairs, reflector, rotors, rotorStart, visibleComponent);
+  // console.log('Enigma state: ', plaintext, ciphertext, steckerPairs, reflector, rotors, rotorStart, visibleComponent);
   const tabs = {
     plugboard: 'Plugboard',
     textentry: 'Text Entry',
@@ -94,6 +94,12 @@ const Enigma = (): JSX.Element => {
         onClick={getCiphertext}>
           {'Encrypt!'}
       </button>
+
+      {
+        ciphertext && ciphertext.length ?
+        <p>{`Ciphertext: ${ciphertext}.`}</p> :
+        null
+      }
     </>
   );
 }
