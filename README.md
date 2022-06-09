@@ -16,3 +16,5 @@ Steps to use:
 2. If desired, use the 'Plugboard', 'Rotors' and 'Reflector Mode' buttons to configure the machine.
 3. Press 'Encrypt!', and your ciphertext will be printed on screen.
 4. Replace the plaintext with the cipertext, or send the machine config and ciphertext to a friend, press 'Encrypt!' and your plaintext should come back out!
+
+Live version available at: https://eglendinning.uosweb.co.uk/enigmajs/
