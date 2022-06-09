@@ -1,28 +1,31 @@
 const rotorSelection = require('./rotorSelect.json');
 import { alphabet, reflectors } from "./utils/utils";
+import { Bindings } from './utils/types';
 
-const substituteChar = (char, plugboard, cb) => {
+let rotor1;
+let rotor2;
+let rotor3;
+
+const substituteChar = (char: string, plugboard: Bindings): string => {
   const upperChar = char.toUpperCase();
   if (Object.keys(plugboard).includes(upperChar)) {
-    return cb(plugboard[upperChar]);
+    return plugboard[upperChar];
   } if (Object.values(plugboard).includes(upperChar)) {
-    return cb(Object.keys(plugboard)[Object.values(plugboard).indexOf(upperChar)]);
+    return Object.keys(plugboard)[Object.values(plugboard).indexOf(upperChar)];
   } else {
-    return cb(upperChar);
+    return upperChar;
   }
 };
 
-const reflector = (refVal: string, char: string, cb: any) => {
+const reflector = (refVal: string, char: string): string => {
   const selectedReflector = reflectors[refVal].split('');
 
   const reflectorMap = alphabet.reduce((prev, curr, index) => ({ ...prev, [curr]: selectedReflector[index] }), {});
 
-  return substituteChar(char, reflectorMap, (out) => {
-    return cb(out);
-  });
+  return reflectorMap[char.toUpperCase()];
 };
 
-const rotator = (array, offset) => {
+const rotator = (array: string[], offset: number): Bindings => {
   const newArr = [...array];
 
   for (let i = 0; i < offset; i++) {
@@ -35,39 +38,19 @@ const rotator = (array, offset) => {
   return alphabet.reduce((prev, curr, index) => ({ ...prev, [curr]: newArr[index] }), {});
 }
 
-const rotorFlip = (rotor) => {
-  // Fn to do a kv swap on rotors for the return trip.
+const rotorFlip = (rotor: Bindings): Bindings => Object.keys(rotor).reduce((prev, curr) => ({ ...prev, [rotor[curr]]: curr }), {});
 
-  const newObj = {};
-  Object.keys(rotor).forEach((k) => newObj[rotor[k]] = k);
-
-  console.log('Flipped rotor: ', newObj);
-
-  return newObj;
-}
-
-let rotor1;
-let rotor2;
-let rotor3;
-
-const rotor = (inputChar, reversed, cb) => {
+const rotor = (char: string, reversed?: boolean) => {
+  const inputChar = char.toUpperCase();
   // Rotate to start positions
   const rotor1Map = rotator(rotorSelection[rotor1.type].split(''), rotor1.pos);
   const rotor2Map = rotator(rotorSelection[rotor2.type].split(''), rotor2.pos);
   const rotor3Map = rotator(rotorSelection[rotor3.type].split(''), rotor3.pos);
 
-  console.log('Rotor maps for letter: ', inputChar, rotor1Map, rotor2Map, rotor3Map);
+  const maps = reversed ? [rotorFlip(rotor3Map), rotorFlip(rotor2Map), rotorFlip(rotor1Map)] : [rotor1Map, rotor2Map, rotor3Map];
+  console.log('Rotor Comparison: ', rotor1Map, rotorFlip(rotor1Map));
 
-  console.log(rotorFlip(rotor1Map));
-
-  let newVal;
-  substituteChar(inputChar, reversed ? rotorFlip(rotor3Map) : rotor1Map,
-    (secondChar) => substituteChar(secondChar, reversed ? rotorFlip(rotor2Map) : rotor2Map,
-      (thirdChar) => substituteChar(thirdChar, reversed ? rotorFlip(rotor1Map) : rotor3Map,
-        (final) => newVal = final
-        )
-      )
-    );
+  const outputChar = maps.reduce((prev, curr) => curr[prev], inputChar);
 
   if (!reversed) {
     rotor1.pos++;
@@ -99,10 +82,10 @@ const rotor = (inputChar, reversed, cb) => {
     }
   }
 
-  return newVal;
+  return outputChar;
 };
 
-const encrypt = (text, pairs, rotors, rStartPos, refVal) => {
+const encrypt = (text: string, pairs: Bindings, rotors: string[], rStartPos: number[], refVal: string): string => {
   const textIn = text.split('');
 
   rotor1 = { type: rotors[0], pos: rStartPos[0], globalRotations: 0 };
@@ -111,25 +94,13 @@ const encrypt = (text, pairs, rotors, rStartPos, refVal) => {
 
   const textArray = textIn.map(char => {
     console.log('Letter in: ', char);
-    return substituteChar(char, pairs, (plugChar) => {
-      // console.log('Plugboard: ', plugChar);
-      return rotor(plugChar, false, (rotorChar) => {
-        // console.log('Rotors first: ', rotorChar);
-        return reflector(refVal, rotorChar, (reflectedChar) => {
-          // console.log('Reflector: ', reflectedChar);
-          return rotor(reflectedChar, true, (reRotorChar) => {
-            // console.log('Rotors again: ', reRotorChar);
-            return substituteChar(reRotorChar, pairs, (finalChar) => {
-              // console.log('Out: ', finalChar);
-              return finalChar;
-            });
-          });
-        });
-      });
-    });
-  });
 
-  console.log('Text out: ', textArray);
+    const plugged = substituteChar(char, pairs);
+    const leftRotor = rotor(plugged);
+    const reflected = reflector(refVal, leftRotor);
+    const rightRotor = rotor(reflected, true);
+    return substituteChar(rightRotor, pairs);
+  });
 
   const textOut = textArray.join('');
   return textOut;
