@@ -22,7 +22,7 @@ const Enigma = (): JSX.Element => {
 
   const checkData = (): boolean => {
     const rotorsValid = rotors.length === 3;
-    const refValid = reflector.length === 1;
+    const refValid = reflector.length >= 1;
     const ptValid = plaintext.length > 0;
 
     if (!rotorsValid || !refValid || !ptValid) {
