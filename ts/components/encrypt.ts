@@ -1,5 +1,5 @@
 const rotorSelection = require('./rotorSelect.json');
-import { alphabet, reflectors } from "./utils/utils";
+import { alphabet, reflectors, punctuation } from "./utils/utils";
 import { Bindings } from './utils/types';
 
 let rotor1;
@@ -85,7 +85,9 @@ const rotor = (char: string, reversed?: boolean) => {
 };
 
 const encrypt = (text: string, pairs: Bindings, rotors: string[], rStartPos: number[], refVal: string): string => {
-  const textIn = text.split('');
+  const textIn = text.trim().split('').filter((char) => !punctuation.includes(char));
+
+  console.log(textIn);
 
   rotor1 = { type: rotors[0], pos: rStartPos[0], globalRotations: 0 };
   rotor2 = { type: rotors[1], pos: rStartPos[1], globalRotations: 0 };

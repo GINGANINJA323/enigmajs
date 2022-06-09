@@ -7,3 +7,5 @@ export const reflectors = {
   tb: 'ENKQAUYWJICOPBLMDXZVFTHRGS',
   tc: 'RDOBJNTKVEHMLFCWZAXGYIPSUQ'
 }
+
+export const punctuation = '!#@./\\`¬~\?<>,{}[]+=_-()"£$%^&*7845612390 ';
