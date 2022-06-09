@@ -42,15 +42,6 @@ const rotorFlip = (rotor: Bindings): Bindings => Object.keys(rotor).reduce((prev
 
 const rotor = (char: string, reversed?: boolean) => {
   const inputChar = char.toUpperCase();
-  // Rotate to start positions
-  const rotor1Map = rotator(rotorSelection[rotor1.type].split(''), rotor1.pos);
-  const rotor2Map = rotator(rotorSelection[rotor2.type].split(''), rotor2.pos);
-  const rotor3Map = rotator(rotorSelection[rotor3.type].split(''), rotor3.pos);
-
-  const maps = reversed ? [rotorFlip(rotor3Map), rotorFlip(rotor2Map), rotorFlip(rotor1Map)] : [rotor1Map, rotor2Map, rotor3Map];
-  console.log('Rotor Comparison: ', rotor1Map, rotorFlip(rotor1Map));
-
-  const outputChar = maps.reduce((prev, curr) => curr[prev], inputChar);
 
   if (!reversed) {
     rotor1.pos++;
@@ -81,6 +72,14 @@ const rotor = (char: string, reversed?: boolean) => {
       rotor3.pos++;
     }
   }
+
+  // Rotate to start positions
+  const rotor1Map = rotator(rotorSelection[rotor1.type].split(''), rotor1.pos);
+  const rotor2Map = rotator(rotorSelection[rotor2.type].split(''), rotor2.pos);
+  const rotor3Map = rotator(rotorSelection[rotor3.type].split(''), rotor3.pos);
+
+  const maps = reversed ? [rotorFlip(rotor3Map), rotorFlip(rotor2Map), rotorFlip(rotor1Map)] : [rotor1Map, rotor2Map, rotor3Map];
+  const outputChar = maps.reduce((prev, curr) => curr[prev], inputChar);
 
   return outputChar;
 };
