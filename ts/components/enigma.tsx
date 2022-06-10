@@ -9,7 +9,7 @@ import Helmet from 'react-helmet';
 
 const Enigma = (): JSX.Element => {
   const [plaintext, setPlaintext] = React.useState('');
-  const [ciphertext, setCiphertext] = React.useState(null);
+  const [ciphertext, setCiphertext] = React.useState<string | null>(null);
   const [steckerPairs, setSteckerPairs] = React.useState({});
   const [reflector, setReflector] = React.useState('b');
   const [rotorStart, setRotorStart] = React.useState([0, 0, 0]);
@@ -34,7 +34,7 @@ const Enigma = (): JSX.Element => {
   }
 
   // console.log('Enigma state: ', plaintext, ciphertext, steckerPairs, reflector, rotors, rotorStart, visibleComponent);
-  const tabs = {
+  const tabs: { [key: string]: string } = {
     plugboard: 'Plugboard',
     textentry: 'Text Entry',
     rotors: 'Rotors',
@@ -44,7 +44,7 @@ const Enigma = (): JSX.Element => {
   return (
     <>
       <Helmet>
-        <title>{`EnigmaJS - ${tabs[visibleComponent || 'Text Entry']}`}</title>
+        <title>{`EnigmaJS - ${tabs[visibleComponent]}`}</title>
       </Helmet>
       <TabView
         onChangeTab={setVisibleComponent}

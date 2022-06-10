@@ -1,10 +1,10 @@
-const rotorSelection = require('./rotorSelect.json');
-import { alphabet, reflectors, punctuation } from "./utils/utils";
-import { Bindings } from './utils/types';
+const { rotorSelection, reflectors } = require('./rotorSelect.json');
+import { alphabet, punctuation } from "./utils/utils";
+import { Bindings, RotorType } from './utils/types';
 
-let rotor1;
-let rotor2;
-let rotor3;
+let rotor1: RotorType = { pos: 0, globalRotations: 0 };
+let rotor2: RotorType = { pos: 0, globalRotations: 0 };
+let rotor3: RotorType = { pos: 0, globalRotations: 0 };
 
 const substituteChar = (char: string, plugboard: Bindings): string => {
   const upperChar = char.toUpperCase();
@@ -20,7 +20,7 @@ const substituteChar = (char: string, plugboard: Bindings): string => {
 const reflector = (refVal: string, char: string): string => {
   const selectedReflector = reflectors[refVal].split('');
 
-  const reflectorMap = alphabet.reduce((prev, curr, index) => ({ ...prev, [curr]: selectedReflector[index] }), {});
+  const reflectorMap: Bindings = alphabet.reduce((prev, curr, index) => ({ ...prev, [curr]: selectedReflector[index] }), {});
 
   return reflectorMap[char.toUpperCase()];
 };
@@ -40,7 +40,7 @@ const rotator = (array: string[], offset: number): Bindings => {
 
 const rotorFlip = (rotor: Bindings): Bindings => Object.keys(rotor).reduce((prev, curr) => ({ ...prev, [rotor[curr]]: curr }), {});
 
-const rotor = (char: string, reversed?: boolean) => {
+const rotor = (char: string, reversed?: boolean): string | void => {
   const inputChar = char.toUpperCase();
 
   if (!reversed) {
@@ -73,6 +73,11 @@ const rotor = (char: string, reversed?: boolean) => {
     }
   }
 
+  if (!rotor1.type || !rotor2.type || !rotor3.type) {
+    console.log('Rotor types unset');
+    return;
+  }
+
   // Rotate to start positions
   const rotor1Map = rotator(rotorSelection[rotor1.type].split(''), rotor1.pos);
   const rotor2Map = rotator(rotorSelection[rotor2.type].split(''), rotor2.pos);
@@ -98,8 +103,20 @@ const encrypt = (text: string, pairs: Bindings, rotors: string[], rStartPos: num
 
     const plugged = substituteChar(char, pairs);
     const leftRotor = rotor(plugged);
+
+    if (!leftRotor) {
+      console.log('Failed to apply rotors');
+      return 'Error: Rotors unset. Check rotor configuration.';
+    }
+
     const reflected = reflector(refVal, leftRotor);
     const rightRotor = rotor(reflected, true);
+
+    if (!rightRotor) {
+      console.log('Failed to apply rotors');
+      return 'Error: Rotors unset. Check rotor configuration.';
+    }
+
     return substituteChar(rightRotor, pairs);
   });
 

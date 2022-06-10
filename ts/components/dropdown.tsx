@@ -1,5 +1,4 @@
 import * as React from 'react';
-import type { Option } from '../utils/types';
 
 interface DropdownProps {
   options: string[];
