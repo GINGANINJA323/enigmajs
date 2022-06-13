@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Dropdown from './dropdown';
-const rotorSelection = require('./rotorSelect.json');
-import { alphabet } from './utils/utils';
+const { rotorSelection } = require('./rotorSelect.json');
 
 interface RotorConfigProps {
   rotors: string[];
@@ -19,13 +18,6 @@ const RotorConfig = (props: RotorConfigProps): JSX.Element => {
     newRotors[pos] = value;
 
     setRotorArray(newRotors);
-  }
-
-  const handleStartChange = (value: number, pos: number): void => {
-    let newRotorStart = rotorStart;
-    newRotorStart[pos] = value;
-
-    setRotorStart(newRotorStart);
   }
 
   const handleChangeRotors = (): void => {
