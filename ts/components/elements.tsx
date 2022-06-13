@@ -50,4 +50,6 @@ export const Input = styled.input`
   border: none;
   padding: 4px;
   font-size: 16px;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
 `;
