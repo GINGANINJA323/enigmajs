@@ -4,6 +4,7 @@ import Plugboard from './plugboard';
 import TextEntry from './textentry';
 import Switch from './switch';
 import RotorConfig from './rotors';
+import About from './about';
 import encrypt from './encrypt';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
@@ -55,8 +56,9 @@ const Enigma = (): JSX.Element => {
   }
 
   const tabs: { [key: string]: string } = {
-    plugboard: 'Plugboard',
+    about: 'About',
     textentry: 'Text Entry',
+    plugboard: 'Plugboard',
     rotors: 'Rotors',
     reflector: 'Reflector Mode'
   };
@@ -74,6 +76,11 @@ const Enigma = (): JSX.Element => {
           onChangeTab={setVisibleComponent}
           tabs={tabs}
         />
+        {
+          visibleComponent === 'about' ?
+          <About /> :
+          null
+        }
         {
           visibleComponent === 'textentry' || !visibleComponent ?
           <TextEntry
