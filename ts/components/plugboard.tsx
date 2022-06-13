@@ -49,8 +49,8 @@ const Plugboard = (props: PlugboardProps): JSX.Element => {
 
   return (
     <>
-      <p>{'Select a letter from the top, then bottom row to pair them together.'}</p>
       <PlugboardContainer>
+        <p>{'Select a letter from the top, then bottom row to pair them together.'}</p>
         <Row>
           {
             alphabet.map((letter: string): JSX.Element => (

@@ -8,7 +8,7 @@ import About from './about';
 import encrypt from './encrypt';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Button, Heading } from './elements';
+import { Heading } from './elements';
 
 const PageWrapper = styled.div`
   display: grid;
@@ -75,6 +75,7 @@ const Enigma = (): JSX.Element => {
         <TabView
           onChangeTab={setVisibleComponent}
           tabs={tabs}
+          visibleComponent={visibleComponent}
         />
         {
           visibleComponent === 'about' || !visibleComponent ?
