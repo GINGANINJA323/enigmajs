@@ -36,7 +36,7 @@ const Enigma = (): JSX.Element => {
   const [reflector, setReflector] = React.useState('b');
   const [rotorStart, setRotorStart] = React.useState([0, 0, 0]);
   const [rotors, setRotors] = React.useState(['I', 'II', 'III']);
-  const [visibleComponent, setVisibleComponent] = React.useState('textentry');
+  const [visibleComponent, setVisibleComponent] = React.useState('about');
 
   const getCiphertext = (): void => {
     setCiphertext(encrypt(plaintext, steckerPairs, rotors, rotorStart, reflector));
@@ -77,12 +77,12 @@ const Enigma = (): JSX.Element => {
           tabs={tabs}
         />
         {
-          visibleComponent === 'about' ?
+          visibleComponent === 'about' || !visibleComponent ?
           <About /> :
           null
         }
         {
-          visibleComponent === 'textentry' || !visibleComponent ?
+          visibleComponent === 'textentry' ?
           <TextEntry
             value={plaintext}
             onChange={setPlaintext}
