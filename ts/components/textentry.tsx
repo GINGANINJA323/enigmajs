@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { TextArea } from './elements';
 
 interface TextEntryProps {
   value: string;
@@ -10,7 +11,7 @@ const TextEntry = (props: TextEntryProps): JSX.Element => {
     <>
       <h2>{'Text Entry'}</h2>
       <p>{'Enter your plaintext message.'}</p>
-      <textarea
+      <TextArea
         value={props.value}
         onChange={(e) => props.onChange(e.target.value)}
         placeholder={'Enter message here...'}

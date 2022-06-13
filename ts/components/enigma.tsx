@@ -6,6 +6,27 @@ import Switch from './switch';
 import RotorConfig from './rotors';
 import encrypt from './encrypt';
 import Helmet from 'react-helmet';
+import styled from 'styled-components';
+import { Button, Heading } from './elements';
+
+const PageWrapper = styled.div`
+  display: grid;
+  padding-top: 2%;
+  grid-template-columns: 10% auto 10%;
+  grid-template-rows: 15% auto;
+`;
+
+const HeaderBox = styled.div`
+  display: flex;
+  justify-content: center;
+  grid-column: 2;
+  grid-row: 1;
+`;
+
+const ContentBox = styled.div`
+  grid-column: 2;
+  grid-column: 2
+`;
 
 const Enigma = (): JSX.Element => {
   const [plaintext, setPlaintext] = React.useState('');
@@ -33,7 +54,6 @@ const Enigma = (): JSX.Element => {
     return false;
   }
 
-  // console.log('Enigma state: ', plaintext, ciphertext, steckerPairs, reflector, rotors, rotorStart, visibleComponent);
   const tabs: { [key: string]: string } = {
     plugboard: 'Plugboard',
     textentry: 'Text Entry',
@@ -42,65 +62,70 @@ const Enigma = (): JSX.Element => {
   };
 
   return (
-    <>
+    <PageWrapper>
       <Helmet>
         <title>{`EnigmaJS - ${tabs[visibleComponent]}`}</title>
       </Helmet>
-      <TabView
-        onChangeTab={setVisibleComponent}
-        tabs={tabs}
-      />
-      {
-        visibleComponent === 'textentry' || !visibleComponent ?
-        <TextEntry
-          value={plaintext}
-          onChange={setPlaintext}
-        /> :
-        null
-      }
+      <HeaderBox>
+        <Heading>EnigmaJS: WWII Encryption</Heading>
+      </HeaderBox>
+      <ContentBox>
+        <TabView
+          onChangeTab={setVisibleComponent}
+          tabs={tabs}
+        />
+        {
+          visibleComponent === 'textentry' || !visibleComponent ?
+          <TextEntry
+            value={plaintext}
+            onChange={setPlaintext}
+          /> :
+          null
+        }
 
-      {
-        visibleComponent === 'plugboard' ?
-        <Plugboard
-          bindings={steckerPairs}
-          onChangeBindings={(bindings) => setSteckerPairs({ ...steckerPairs, ...bindings })}
-          resetPairs={() => setSteckerPairs({})}
-        /> :
-        null
-      }
+        {
+          visibleComponent === 'plugboard' ?
+          <Plugboard
+            bindings={steckerPairs}
+            onChangeBindings={(bindings) => setSteckerPairs({ ...steckerPairs, ...bindings })}
+            resetPairs={() => setSteckerPairs({})}
+          /> :
+          null
+        }
 
-      {
-        visibleComponent === 'reflector' ?
-        <Switch
-          onChange={setReflector}
-          value={reflector}
-        /> :
-        null
-      }
+        {
+          visibleComponent === 'reflector' ?
+          <Switch
+            onChange={setReflector}
+            value={reflector}
+          /> :
+          null
+        }
 
-      { 
-        visibleComponent === 'rotors' ?
-        <RotorConfig
-          onChangeRotorType={setRotors}
-          onChangeRotorStart={setRotorStart}
-          rotors={rotors}
-          rotorStart={rotorStart}
-        /> :
-        null
-      }
+        { 
+          visibleComponent === 'rotors' ?
+          <RotorConfig
+            onChangeRotorType={setRotors}
+            onChangeRotorStart={setRotorStart}
+            rotors={rotors}
+            rotorStart={rotorStart}
+          /> :
+          null
+        }
 
-      <button
-        disabled={checkData()}
-        onClick={getCiphertext}>
-          {'Encrypt!'}
-      </button>
+        <Button
+          disabled={checkData()}
+          onClick={getCiphertext}>
+            {'Encrypt!'}
+        </Button>
 
-      {
-        ciphertext && ciphertext.length ?
-        <p>{`Ciphertext: ${ciphertext}.`}</p> :
-        null
-      }
-    </>
+        {
+          ciphertext && ciphertext.length ?
+          <p>{`Ciphertext: ${ciphertext}.`}</p> :
+          null
+        }
+      </ContentBox>
+    </PageWrapper>
   );
 }
 

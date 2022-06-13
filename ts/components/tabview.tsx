@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Button } from './elements';
 
 interface TabViewProps {
   tabs: { [key: string]: string },
@@ -10,11 +11,11 @@ const TabView = (props: TabViewProps): JSX.Element => {
     <>
       {
         Object.keys(props.tabs).map(t => 
-            <button
+            <Button
               onClick={() => props.onChangeTab(t)}
               key={t}
             >{props.tabs[t]}
-            </button>
+            </Button>
           )
       }
     </>
