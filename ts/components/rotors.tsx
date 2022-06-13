@@ -37,7 +37,6 @@ const RotorConfig = (props: RotorConfigProps): JSX.Element => {
 
   return (
     <>
-      <h2>{'Rotor Selection'}</h2>
       <p>{'Select the three rotors you would like to encrypt with, as well as their respective start positions.'}</p>
 
       <Dropdown

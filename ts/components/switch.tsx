@@ -27,7 +27,6 @@ interface SwitchProps {
 const Switch = (props: SwitchProps): JSX.Element => {
   return (
     <>
-      <h2>{'Reflector Selection'}</h2>
       <p>{'Select the desired reflector you would like to use.'}</p>
       {
         reflectors.map((r) => (

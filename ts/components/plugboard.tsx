@@ -48,7 +48,6 @@ const Plugboard = (props: PlugboardProps): JSX.Element => {
 
   return (
     <div>
-      <h2>{'Stecker Pairings'}</h2>
       <p>{'Select a letter from the top, then bottom row to pair them together.'}</p>
       <div style={styles.row}>
         {
