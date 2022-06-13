@@ -6,6 +6,7 @@ const MainWrapper = styled.div`
   background-color: #222;
   color: #FFF;
   margin-top: 0;
+  height: 100%;
 
   * {
     font-family: 'Courier Prime', monospace;
