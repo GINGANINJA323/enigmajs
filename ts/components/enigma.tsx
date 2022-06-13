@@ -86,6 +86,9 @@ const Enigma = (): JSX.Element => {
           <TextEntry
             value={plaintext}
             onChange={setPlaintext}
+            checkData={checkData}
+            getCipherText={getCiphertext}
+            ciphertext={ciphertext}
           /> :
           null
         }
@@ -117,18 +120,6 @@ const Enigma = (): JSX.Element => {
             rotors={rotors}
             rotorStart={rotorStart}
           /> :
-          null
-        }
-
-        <Button
-          disabled={checkData()}
-          onClick={getCiphertext}>
-            {'Encrypt!'}
-        </Button>
-
-        {
-          ciphertext && ciphertext.length ?
-          <p>{`Ciphertext: ${ciphertext}.`}</p> :
           null
         }
       </ContentBox>
