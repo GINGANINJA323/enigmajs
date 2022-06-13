@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Select } from './elements';
 
 interface DropdownProps {
   options: string[];
@@ -8,7 +9,7 @@ interface DropdownProps {
 
 const Dropdown = (props: DropdownProps): JSX.Element => {
   return (
-    <select>
+    <Select>
       {
         props.options.map(o =>
           <option
@@ -20,7 +21,7 @@ const Dropdown = (props: DropdownProps): JSX.Element => {
           </option>
         )
       }
-    </select>
+    </Select>
   );
 }
 

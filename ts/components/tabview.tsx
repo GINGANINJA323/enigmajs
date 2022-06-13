@@ -15,6 +15,7 @@ const TabWrapper = styled.div`
 const TabButton = styled(Button)`  
   padding: 15px;
   font-size: 18px;
+  border-radius: 0px;
   :first-child {
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;

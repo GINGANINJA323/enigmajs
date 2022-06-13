@@ -1,6 +1,8 @@
 import React from 'react';
 import { alphabet } from './utils/utils';
 import type { Bindings } from './utils/types';
+import styled from 'styled-components';
+import { Button } from './elements';
 
 interface PlugboardProps {
   resetPairs: () => void;
@@ -8,22 +10,15 @@ interface PlugboardProps {
   onChangeBindings: (bindings: Bindings) => void
 }
 
-const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
+const PlugboardButton = styled(Button)`
+  margin: 0 2px;
+`;
 
-  row: {
-    display: 'flex',
-    flexDirection: 'row',
-    margin: '5px 0'
-  },
-
-  button: {
-    margin: '0 2px'
-  }
-}
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 5px 0;
+`;
 
 const Plugboard = (props: PlugboardProps): JSX.Element => {
   const [selector, setSelector] = React.useState(null);
@@ -47,25 +42,25 @@ const Plugboard = (props: PlugboardProps): JSX.Element => {
   }
 
   return (
-    <div>
+    <>
       <p>{'Select a letter from the top, then bottom row to pair them together.'}</p>
-      <div style={styles.row}>
+      <Row>
         {
           alphabet.map((letter: string): JSX.Element => (
-            <button disabled={letterDisabled(letter)} style={styles.button} onClick={() => setSelector(letter)}>{letter}</button>
+            <PlugboardButton disabled={letterDisabled(letter)} onClick={() => setSelector(letter)}>{letter}</PlugboardButton>
           ))
         }
-        <button style={styles.button} disabled={!Object.keys(props.bindings).length} onClick={props.resetPairs}>Reset Pairings</button>
-      </div>
+        <PlugboardButton disabled={!Object.keys(props.bindings).length} onClick={props.resetPairs}>Reset Pairings</PlugboardButton>
+      </Row>
 
-      <div style={styles.row}>
+      <Row>
         {
           alphabet.map((letter: string): JSX.Element => (
-            <button disabled={!selector || letterDisabled(letter)} style={styles.button} onClick={() => respondLetter(letter)}>{letter}</button>
+            <PlugboardButton disabled={!selector || letterDisabled(letter)} onClick={() => respondLetter(letter)}>{letter}</PlugboardButton>
           ))
         }
-      </div>
-    </div>
+      </Row>
+    </>
   );
 }
 

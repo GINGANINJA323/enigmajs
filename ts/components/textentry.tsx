@@ -19,7 +19,6 @@ const TextEntryWrapper = styled.div`
 
 const EncryptButton = styled(Button)`
   width: 50%;
-  border-radius: 10px;
   align-self: center;
   margin-top: 10px;
 `;
