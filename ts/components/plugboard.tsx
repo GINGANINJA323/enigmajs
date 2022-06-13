@@ -10,6 +10,8 @@ interface PlugboardProps {
   onChangeBindings: (bindings: Bindings) => void
 }
 
+const arrow = '↔';
+
 const PlugboardButton = styled(Button)`
   margin: 0 2px;
 `;
@@ -24,6 +26,10 @@ const PlugboardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`;
+
+const PairCell = styled.p`
+  margin 0 15px;
 `;
 
 const Plugboard = (props: PlugboardProps): JSX.Element => {
@@ -66,7 +72,16 @@ const Plugboard = (props: PlugboardProps): JSX.Element => {
             ))
           }
         </Row>
-        <PlugboardButton disabled={!Object.keys(props.bindings).length} onClick={props.resetPairs}>Reset Pairings</PlugboardButton>
+        <PlugboardButton disabled={!Object.keys(props.bindings).length} onClick={props.resetPairs}>
+          Reset Pairings
+        </PlugboardButton>
+        <Row>
+          {
+            Object.keys(props.bindings).map((binding) => (
+              <PairCell>{` ${binding} ${arrow} ${props.bindings[binding]}`}</PairCell>
+            ))
+          }
+        </Row>
       </PlugboardContainer>
     </>
   );
