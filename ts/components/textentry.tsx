@@ -17,6 +17,13 @@ const TextEntryWrapper = styled.div`
   justify-content: center;
 `;
 
+const EncryptButton = styled(Button)`
+  width: 50%;
+  border-radius: 10px;
+  align-self: center;
+  margin-top: 10px;
+`;
+
 const TextEntry = (props: TextEntryProps): JSX.Element => {
   const { value, onChange, checkData, getCipherText, ciphertext = '' } = props;
   return (
@@ -27,11 +34,11 @@ const TextEntry = (props: TextEntryProps): JSX.Element => {
         onChange={(e) => onChange(e.target.value)}
         placeholder={'Enter data here...'}
       />
-      <Button
+      <EncryptButton
         disabled={checkData()}
         onClick={getCipherText}>
           {'Encrypt!'}
-      </Button>
+      </EncryptButton>
 
       {
         ciphertext && ciphertext.length ?

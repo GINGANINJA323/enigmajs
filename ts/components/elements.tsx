@@ -15,10 +15,11 @@ export const Button = styled.button`
 export const TextArea = styled.textarea`
   color: #FFF;
   background-color: #3d3d3d;
-  border-radius: 0px;
+  border-radius: 10px;
   border: none;
   resize: none;
   height: 40vh;
+  padding: 10px;
 `;
 
 export const Heading = styled.h1`
