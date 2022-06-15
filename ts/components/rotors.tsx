@@ -36,16 +36,18 @@ const RotorConfig = (props: RotorConfigProps): JSX.Element => {
   const [rotorArray, setRotorArray] = React.useState(props.rotors || ['I', 'II', 'III']);
   const [rotorStart, setRotorStart] = React.useState(props.rotorStart || [0, 0, 0]);
 
+  const handleChangeRotors = (): void => {
+    props.onChangeRotorType(rotorArray);
+    props.onChangeRotorStart(rotorStart);
+  }
+
   const handleRotorChange = (value: string, pos: number): void => {
     let newRotors = rotorArray;
     newRotors[pos] = value;
 
     setRotorArray(newRotors);
-  }
 
-  const handleChangeRotors = (): void => {
-    props.onChangeRotorType(rotorArray);
-    props.onChangeRotorStart(rotorStart);
+    handleChangeRotors();
   }
 
   const rotors = rotorSelection;
@@ -99,13 +101,6 @@ const RotorConfig = (props: RotorConfigProps): JSX.Element => {
           />
         </Individual>
       </RotorContainer>
-      <ButtonContainer>
-        <SetButton
-          onClick={handleChangeRotors}
-        >
-          {'Set'}
-        </SetButton>
-      </ButtonContainer>
     </>
   );
 
