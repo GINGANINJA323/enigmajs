@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Dropdown from './dropdown';
-import { Button, Input } from './elements';
+import { Input } from './elements';
 import styled from 'styled-components';
 const { rotorSelection } = require('./rotorSelect.json');
 
@@ -21,15 +21,6 @@ const Individual = styled.div`
   display: flex;
   flex-direction: column;
   margin: 10px;
-`;
-
-const SetButton = styled(Button)`
-  width: 50%;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
 `;
 
 const RotorConfig = (props: RotorConfigProps): JSX.Element => {

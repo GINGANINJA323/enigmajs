@@ -1,9 +1,10 @@
 import * as React from 'react';
 import { Select } from './elements';
+import { EventType } from './utils/types';
 
 interface DropdownProps {
   options: string[];
-  onClick: () => void;
+  onClick: (e: EventType) => void;
   value: string;
 }
 

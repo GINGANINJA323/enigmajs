@@ -7,3 +7,9 @@ export interface RotorType {
   pos: number;
   globalRotations: number
 }
+
+export interface EventType {
+  target: {
+    value: string
+  }
+}
