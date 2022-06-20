@@ -1,0 +1,116 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`About renders correctly 1`] = `
+Object {
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="sc-bczRLJ cHfZsy"
+      >
+        <p>
+          This is an Enigma simulator in JavaScript, with a ReactJS front-end. Use the navigation options above to continue.
+        </p>
+        <p>
+          The Enigma machine was an encryption system used extensively by the German forces during World War 2. It works using 3 main components: the Plugboard, the Rotors and the Reflectors. The plugboard performs basic letter substitution using wires to connect a pair of letters together. The rotors perform a similar function, except they spin on different intervals as the message is typed out. The rotors are used twice per keypress with the reflector being used to perform a substitution in between. For more information, see 
+          <a
+            href="https://www.cryptomuseum.com/crypto/enigma/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            here
+          </a>
+          . The code for this website, and the underlying Enigma logic, can be found on the Git repo 
+          <a
+            href="https://github.com/GINGANINJA323/enigmajs"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            here
+          </a>
+          .
+        </p>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="sc-bczRLJ cHfZsy"
+    >
+      <p>
+        This is an Enigma simulator in JavaScript, with a ReactJS front-end. Use the navigation options above to continue.
+      </p>
+      <p>
+        The Enigma machine was an encryption system used extensively by the German forces during World War 2. It works using 3 main components: the Plugboard, the Rotors and the Reflectors. The plugboard performs basic letter substitution using wires to connect a pair of letters together. The rotors perform a similar function, except they spin on different intervals as the message is typed out. The rotors are used twice per keypress with the reflector being used to perform a substitution in between. For more information, see 
+        <a
+          href="https://www.cryptomuseum.com/crypto/enigma/"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          here
+        </a>
+        . The code for this website, and the underlying Enigma logic, can be found on the Git repo 
+        <a
+          href="https://github.com/GINGANINJA323/enigmajs"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          here
+        </a>
+        .
+      </p>
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;

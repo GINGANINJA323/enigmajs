@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack serve --open --config webpack.config.js --hot",
     "build": "webpack --config webpack.config.js",
-    "test": "jest"
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "author": "",
   "license": "ISC",
