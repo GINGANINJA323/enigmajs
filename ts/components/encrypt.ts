@@ -1,4 +1,4 @@
-import { rotorSelection, reflectors } from './rotorSelect.json';
+const { rotorSelection, reflectors } = require('./rotorSelect.json');
 import { alphabet, punctuation } from "./utils/utils";
 import { Bindings, RotorType } from './utils/types';
 
@@ -89,7 +89,7 @@ export const rotor = (char: string, reversed?: boolean): string | void => {
   return outputChar;
 };
 
-const encrypt = (text: string, pairs: Bindings, rotors: string[], rStartPos: number[], refVal: string): string => {
+export const encrypt = (text: string, pairs: Bindings, rotors: string[], rStartPos: number[], refVal: string): string => {
   const textIn = text.trim().split('').filter((char) => !punctuation.includes(char));
 
   console.log(textIn);
@@ -99,7 +99,6 @@ const encrypt = (text: string, pairs: Bindings, rotors: string[], rStartPos: num
   rotor3 = { type: rotors[2], pos: rStartPos[2], globalRotations: 0 };
 
   const textArray = textIn.map(char => {
-    console.log('Letter in: ', char);
 
     const plugged = substituteChar(char, pairs);
     const leftRotor = rotor(plugged);
@@ -123,6 +122,4 @@ const encrypt = (text: string, pairs: Bindings, rotors: string[], rStartPos: num
   const textOut = textArray.join('');
   return textOut;
 }
-
-export default encrypt;
 

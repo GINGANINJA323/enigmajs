@@ -5,7 +5,7 @@ import TextEntry from './textentry';
 import Switch from './switch';
 import RotorConfig from './rotors';
 import About from './about';
-import encrypt from './encrypt';
+import { encrypt } from './encrypt';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Heading } from './elements';
@@ -63,6 +63,11 @@ const Enigma = (): JSX.Element => {
     reflector: 'Reflector Mode'
   };
 
+  const prepDownload = (): string => {
+    const settings = new Blob([JSON.stringify({ steckerPairs, reflector, rotorStart, rotors })], { type: 'text/plain' });
+    return window.URL.createObjectURL(settings);
+  }
+
   return (
     <PageWrapper>
       <Helmet>
@@ -90,6 +95,7 @@ const Enigma = (): JSX.Element => {
             checkData={checkData}
             getCipherText={getCiphertext}
             ciphertext={ciphertext}
+            getSettingsLink={prepDownload}
           /> :
           null
         }

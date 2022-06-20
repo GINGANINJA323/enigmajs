@@ -9,6 +9,7 @@ interface TextEntryProps {
   checkData: () => boolean;
   getCipherText: () => void;
   ciphertext: string | null;
+  getSettingsLink: () => string;
 }
 
 const TextEntryWrapper = styled.div`
@@ -24,7 +25,7 @@ const EncryptButton = styled(Button)`
 `;
 
 const TextEntry = (props: TextEntryProps): JSX.Element => {
-  const { value, onChange, checkData, getCipherText, ciphertext = '' } = props;
+  const { value, onChange, checkData, getCipherText, ciphertext = '', getSettingsLink } = props;
   return (
     <TextEntryWrapper>
       <p>{'Enter your plaintext, or ciphertext, here and press Encrypt to get the output.'}</p>
@@ -38,6 +39,15 @@ const TextEntry = (props: TextEntryProps): JSX.Element => {
         onClick={getCipherText}>
           {'Encrypt!'}
       </EncryptButton>
+
+      <a
+        download={'enigma_settings.txt'}
+        href={getSettingsLink()}
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        {'Download Settings'}
+      </a>
 
       {
         ciphertext && ciphertext.length ?

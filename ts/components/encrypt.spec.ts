@@ -1,11 +1,10 @@
-import * as EncryptLogic from "./encrypt";
-import { rotorSelection, reflectors } from './rotorSelect.json';
+import { substituteChar, reflector } from "./encrypt";
 
 describe('Encrypt', () => {
   const bindings = {A: 'B', C: 'D', E: 'F'};
 
   test('substituteChar function works correctly', () => {
-    const sub = EncryptLogic.substituteChar;
+    const sub = substituteChar;
 
     expect(sub('A', bindings)).toEqual('B');
     expect(sub('D', bindings)).toEqual('C');
@@ -13,7 +12,7 @@ describe('Encrypt', () => {
   });
 
   test('reflector function works correctly', () => {
-    const ref = EncryptLogic.reflector;
+    const ref = reflector;
 
     expect(ref('b', 'C')).toEqual('U');
     expect(ref('c', 'd')).toEqual('J');
