@@ -10,7 +10,7 @@ interface DropdownProps {
 
 const Dropdown = (props: DropdownProps): JSX.Element => {
   return (
-    <Select data-testid={'select'}>
+    <Select>
       {
         props.options.map(o =>
           <option
