@@ -1,4 +1,4 @@
-const { rotorSelection, reflectors } = require('./rotorSelect.json');
+import { rotorSelection, reflectors } from './rotorSelect.json';
 import { alphabet, punctuation } from "./utils/utils";
 import { Bindings, RotorType } from './utils/types';
 
@@ -6,7 +6,7 @@ let rotor1: RotorType = { pos: 0, globalRotations: 0 };
 let rotor2: RotorType = { pos: 0, globalRotations: 0 };
 let rotor3: RotorType = { pos: 0, globalRotations: 0 };
 
-const substituteChar = (char: string, plugboard: Bindings): string => {
+export const substituteChar = (char: string, plugboard: Bindings): string => {
   const upperChar = char.toUpperCase();
   if (Object.keys(plugboard).includes(upperChar)) {
     return plugboard[upperChar];
@@ -17,7 +17,7 @@ const substituteChar = (char: string, plugboard: Bindings): string => {
   }
 };
 
-const reflector = (refVal: string, char: string): string => {
+export const reflector = (refVal: string, char: string): string => {
   const selectedReflector = reflectors[refVal].split('');
 
   const reflectorMap: Bindings = alphabet.reduce((prev, curr, index) => ({ ...prev, [curr]: selectedReflector[index] }), {});
@@ -25,7 +25,7 @@ const reflector = (refVal: string, char: string): string => {
   return reflectorMap[char.toUpperCase()];
 };
 
-const rotator = (array: string[], offset: number): Bindings => {
+export const rotator = (array: string[], offset: number): Bindings => {
   const newArr = [...array];
 
   for (let i = 0; i < offset; i++) {
@@ -38,9 +38,9 @@ const rotator = (array: string[], offset: number): Bindings => {
   return alphabet.reduce((prev, curr, index) => ({ ...prev, [curr]: newArr[index] }), {});
 }
 
-const rotorFlip = (rotor: Bindings): Bindings => Object.keys(rotor).reduce((prev, curr) => ({ ...prev, [rotor[curr]]: curr }), {});
+export const rotorFlip = (rotor: Bindings): Bindings => Object.keys(rotor).reduce((prev, curr) => ({ ...prev, [rotor[curr]]: curr }), {});
 
-const rotor = (char: string, reversed?: boolean): string | void => {
+export const rotor = (char: string, reversed?: boolean): string | void => {
   const inputChar = char.toUpperCase();
 
   if (!reversed) {
