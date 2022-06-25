@@ -33,12 +33,10 @@ const RotorConfig = (props: RotorConfigProps): JSX.Element => {
   }
 
   const handleRotorChange = (value: string, pos: number): void => {
-    let newRotors = rotorArray;
+    const newRotors = rotorArray;
     newRotors[pos] = value;
 
     setRotorArray(newRotors);
-
-    handleChangeRotors();
   }
 
   const rotors = rotorSelection;
@@ -59,6 +57,7 @@ const RotorConfig = (props: RotorConfigProps): JSX.Element => {
             max={26}
             value={rotorStart[0]}
             onChange={(e) => setRotorStart([Number(e.target.value), rotorStart[1], rotorStart[2]])}
+            onBlur={() => handleChangeRotors()}
           />
         </Individual>
 
@@ -74,6 +73,7 @@ const RotorConfig = (props: RotorConfigProps): JSX.Element => {
             max={26}
             value={rotorStart[1]}
             onChange={(e) => setRotorStart([rotorStart[0], Number(e.target.value), rotorStart[2]])}
+            onBlur={() => handleChangeRotors()}
           />
         </Individual>
 
@@ -89,6 +89,7 @@ const RotorConfig = (props: RotorConfigProps): JSX.Element => {
             max={26}
             value={rotorStart[2]}
             onChange={(e) => setRotorStart([rotorStart[0], rotorStart[1], Number(e.target.value)])}
+            onBlur={() => handleChangeRotors()}
           />
         </Individual>
       </RotorContainer>
