@@ -68,6 +68,38 @@ const Enigma = (): JSX.Element => {
     return window.URL.createObjectURL(settings);
   }
 
+  const parseFile = async (e: any) => {
+    console.log(e.target.files[0]);
+    e.preventDefault();
+    const reader = new FileReader();
+
+    reader.onload = async () => {
+      console.log(reader.result);
+      return reader.result;
+    };
+
+    reader.readAsText(e.target.files[0]);
+  }
+
+  const importSettings = async (file: any): Promise<void> => {
+    const settings = await parseFile(file);
+    console.log(settings);
+
+    const fields = {
+      steckerPairs: setSteckerPairs,
+      rotors: setRotors,
+      rotorStart: setRotorStart,
+      reflector: setReflector
+    };
+
+    // Load settings from file into state.
+    Object.keys(fields).forEach((k) => {
+      if (settings[k]) {
+        fields[k](settings[k]);
+      }
+    });
+  }
+
   return (
     <PageWrapper>
       <Helmet>
@@ -96,6 +128,7 @@ const Enigma = (): JSX.Element => {
             getCipherText={getCiphertext}
             ciphertext={ciphertext}
             getSettingsLink={prepDownload}
+            importSettings={importSettings}
           /> :
           null
         }

@@ -10,6 +10,7 @@ interface TextEntryProps {
   getCipherText: () => void;
   ciphertext: string | null;
   getSettingsLink: () => string;
+  importSettings: (settings: any) => void;
 }
 
 const TextEntryWrapper = styled.div`
@@ -25,7 +26,7 @@ const EncryptButton = styled(Button)`
 `;
 
 const TextEntry = (props: TextEntryProps): JSX.Element => {
-  const { value, onChange, checkData, getCipherText, ciphertext = '', getSettingsLink } = props;
+  const { value, onChange, checkData, getCipherText, ciphertext = '', getSettingsLink, importSettings } = props;
   return (
     <TextEntryWrapper>
       <p>{'Enter your plaintext, or ciphertext, here and press Encrypt to get the output.'}</p>
@@ -48,6 +49,8 @@ const TextEntry = (props: TextEntryProps): JSX.Element => {
       >
         {'Download Settings'}
       </a>
+
+      <input type={'file'} onInput={importSettings}></input>
 
       {
         ciphertext && ciphertext.length ?
