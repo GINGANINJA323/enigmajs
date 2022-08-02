@@ -69,12 +69,19 @@ const Enigma = (): JSX.Element => {
   }
 
   const parseFile = async (e: any) => {
-    console.log(e.target.files[0]);
     e.preventDefault();
     const reader = new FileReader();
 
     reader.onload = async () => {
-      console.log(reader.result);
+      if (typeof reader.result === 'string') {
+        const settings = JSON.parse(reader.result);
+
+        setSteckerPairs(settings.steckerPairs);
+        setRotorStart(settings.rotorStart);
+        setRotors(settings.rotors);
+        setReflector(settings.reflector);
+      }
+
       return reader.result;
     };
 
@@ -83,7 +90,6 @@ const Enigma = (): JSX.Element => {
 
   const importSettings = async (file: any): Promise<void> => {
     const settings = await parseFile(file);
-    console.log(settings);
 
     const fields = {
       steckerPairs: setSteckerPairs,
@@ -94,7 +100,7 @@ const Enigma = (): JSX.Element => {
 
     // Load settings from file into state.
     Object.keys(fields).forEach((k) => {
-      if (settings[k]) {
+      if (settings?.[k]) {
         fields[k](settings[k]);
       }
     });
