@@ -6,13 +6,13 @@ Object {
   "baseElement": <body>
     <div>
       <div
-        class="sc-fEOsli eDwaar"
+        class="sc-dIouRR leMNeC"
       >
         <div
-          class="sc-ksZaOG frIDmL"
+          class="sc-fEOsli eMWhom"
         >
           <div
-            class="sc-hAZoDl eMkmPI"
+            class="sc-bjUoiL nsdGf"
           >
             <h1
               class="sc-dkzDqf jnhqor"
@@ -21,39 +21,39 @@ Object {
             </h1>
           </div>
           <div
-            class="sc-fnykZs hoeozf"
+            class="sc-idiyUo hoCeov"
           >
             <div
-              class="sc-jSMfEi iomruJ"
+              class="sc-iBkjds hYRAJe"
             >
               <button
-                class="sc-bczRLJ sc-gKXOVf bLqGOH hTYvza"
+                class="sc-bczRLJ sc-ftvSup bLqGOH kXVVLP"
               >
                 About
               </button>
               <button
-                class="sc-bczRLJ sc-gKXOVf bLqGOH jXEIIj"
+                class="sc-bczRLJ sc-ftvSup bLqGOH bbGsYa"
               >
                 Text Entry
               </button>
               <button
-                class="sc-bczRLJ sc-gKXOVf bLqGOH jXEIIj"
+                class="sc-bczRLJ sc-ftvSup bLqGOH bbGsYa"
               >
                 Plugboard
               </button>
               <button
-                class="sc-bczRLJ sc-gKXOVf bLqGOH jXEIIj"
+                class="sc-bczRLJ sc-ftvSup bLqGOH bbGsYa"
               >
                 Rotors
               </button>
               <button
-                class="sc-bczRLJ sc-gKXOVf bLqGOH jXEIIj"
+                class="sc-bczRLJ sc-ftvSup bLqGOH bbGsYa"
               >
                 Reflector Mode
               </button>
             </div>
             <div
-              class="sc-breuTD gXhIYN"
+              class="sc-fnykZs dOnQha"
             >
               <p>
                 This is an Enigma simulator in JavaScript, with a ReactJS front-end. Use the navigation options above to continue.
@@ -88,13 +88,13 @@ Object {
   </body>,
   "container": <div>
     <div
-      class="sc-fEOsli eDwaar"
+      class="sc-dIouRR leMNeC"
     >
       <div
-        class="sc-ksZaOG frIDmL"
+        class="sc-fEOsli eMWhom"
       >
         <div
-          class="sc-hAZoDl eMkmPI"
+          class="sc-bjUoiL nsdGf"
         >
           <h1
             class="sc-dkzDqf jnhqor"
@@ -103,39 +103,39 @@ Object {
           </h1>
         </div>
         <div
-          class="sc-fnykZs hoeozf"
+          class="sc-idiyUo hoCeov"
         >
           <div
-            class="sc-jSMfEi iomruJ"
+            class="sc-iBkjds hYRAJe"
           >
             <button
-              class="sc-bczRLJ sc-gKXOVf bLqGOH hTYvza"
+              class="sc-bczRLJ sc-ftvSup bLqGOH kXVVLP"
             >
               About
             </button>
             <button
-              class="sc-bczRLJ sc-gKXOVf bLqGOH jXEIIj"
+              class="sc-bczRLJ sc-ftvSup bLqGOH bbGsYa"
             >
               Text Entry
             </button>
             <button
-              class="sc-bczRLJ sc-gKXOVf bLqGOH jXEIIj"
+              class="sc-bczRLJ sc-ftvSup bLqGOH bbGsYa"
             >
               Plugboard
             </button>
             <button
-              class="sc-bczRLJ sc-gKXOVf bLqGOH jXEIIj"
+              class="sc-bczRLJ sc-ftvSup bLqGOH bbGsYa"
             >
               Rotors
             </button>
             <button
-              class="sc-bczRLJ sc-gKXOVf bLqGOH jXEIIj"
+              class="sc-bczRLJ sc-ftvSup bLqGOH bbGsYa"
             >
               Reflector Mode
             </button>
           </div>
           <div
-            class="sc-breuTD gXhIYN"
+            class="sc-fnykZs dOnQha"
           >
             <p>
               This is an Enigma simulator in JavaScript, with a ReactJS front-end. Use the navigation options above to continue.

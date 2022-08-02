@@ -70,29 +70,33 @@ const Enigma = (): JSX.Element => {
     return window.URL.createObjectURL(settings);
   }
 
-  const parseFile = async (e: any) => {
+  const parseFile = async (e: any): Promise<void> => {
     e.preventDefault();
     const reader = new FileReader();
 
     reader.onload = async () => {
-      if (typeof reader.result === 'string') {
-        const settings = JSON.parse(reader.result);
-
-        setSteckerPairs(settings.steckerPairs);
-        setRotorStart(settings.rotorStart);
-        setRotors(settings.rotors);
-        setReflector(settings.reflector);
-
-        toast('Settings loaded successfully.', {
-          type: 'success'
-        })
-      } else {
+      try {
+        if (typeof reader.result === 'string') {
+          const settings = JSON.parse(reader.result);
+  
+          setSteckerPairs(settings.steckerPairs);
+          setRotorStart(settings.rotorStart);
+          setRotors(settings.rotors);
+          setReflector(settings.reflector);
+  
+          toast('Settings loaded successfully.', {
+            type: 'success'
+          })
+        } else {
+          toast('Upload failed.', {
+            type: 'error'
+          });
+        }
+      } catch(e) {
         toast('Upload failed.', {
           type: 'error'
         });
       }
-
-      return reader.result;
     };
 
     reader.readAsText(e.target.files[0]);

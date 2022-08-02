@@ -53,3 +53,37 @@ export const Input = styled.input`
   -webkit-appearance: none;
   -moz-appearance: textfield;
 `;
+
+export const Link = styled.a`
+  color: #FFF;
+  text-decoration: none;
+  background-color: #3d3d3d;
+  padding: 10px;
+  width: 22%;
+  border-radius: 10px;
+  margin-top: 10px;
+  :hover {
+    background-color: #2d2d2d;
+  }
+`;
+
+export const FileInput = styled.input`
+  color: #fff;
+  font-size: 16px;
+  margin-top: 10px;
+  :hover {
+    cursor: pointer;
+  }
+  ::file-selector-button {
+    color: #FFF;
+    font-family: 'Courier Prime', monospace;
+    background-color: #3d3d3d;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    :hover {
+      background-color: #2d2d2d;
+    }
+  }
+`;

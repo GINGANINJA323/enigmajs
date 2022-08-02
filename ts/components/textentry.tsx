@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { TextArea } from './elements';
 import styled from 'styled-components';
-import { Button } from './elements';
+import { Button, Link, FileInput } from './elements';
 
 interface TextEntryProps {
   value: string;
@@ -25,6 +25,14 @@ const EncryptButton = styled(Button)`
   margin-top: 10px;
 `;
 
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 50%;
+  align-self: center;
+`;
+
 const TextEntry = (props: TextEntryProps): JSX.Element => {
   const { value, onChange, checkData, getCipherText, ciphertext = '', getSettingsLink, importSettings } = props;
   return (
@@ -41,16 +49,18 @@ const TextEntry = (props: TextEntryProps): JSX.Element => {
           {'Encrypt!'}
       </EncryptButton>
 
-      <a
-        download={'enigma_settings.txt'}
-        href={getSettingsLink()}
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        {'Download Settings'}
-      </a>
+      <Row>
+        <Link
+          download={'enigma_settings.txt'}
+          href={getSettingsLink()}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          {'Download Settings'}
+        </Link>
 
-      <input type={'file'} onInput={importSettings}></input>
+        <FileInput accept='.txt' type={'file'} onInput={importSettings}></FileInput>
+      </Row>
 
       {
         ciphertext && ciphertext.length ?
