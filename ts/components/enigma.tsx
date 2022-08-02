@@ -9,6 +9,8 @@ import { encrypt } from './encrypt';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Heading } from './elements';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const PageWrapper = styled.div`
   display: grid;
@@ -80,6 +82,14 @@ const Enigma = (): JSX.Element => {
         setRotorStart(settings.rotorStart);
         setRotors(settings.rotors);
         setReflector(settings.reflector);
+
+        toast('Settings loaded successfully.', {
+          type: 'success'
+        })
+      } else {
+        toast('Upload failed.', {
+          type: 'error'
+        });
       }
 
       return reader.result;
@@ -169,6 +179,7 @@ const Enigma = (): JSX.Element => {
           null
         }
       </ContentBox>
+      <ToastContainer toastStyle={{ backgroundColor: '#3d3d3d', color: '#FFF' }} />
     </PageWrapper>
   );
 }
