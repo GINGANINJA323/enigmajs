@@ -111,6 +111,7 @@ const Enigma = (): JSX.Element => {
     // Load settings from file into state.
     Object.keys(fields).forEach((k) => {
       if (settings?.[k]) {
+        // @ts-ignore
         fields[k](settings[k]);
       }
     });

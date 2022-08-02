@@ -79,6 +79,9 @@ Object {
               </p>
             </div>
           </div>
+          <div
+            class="Toastify"
+          />
         </div>
       </div>
     </div>
@@ -158,6 +161,9 @@ Object {
             </p>
           </div>
         </div>
+        <div
+          class="Toastify"
+        />
       </div>
     </div>
   </div>,
