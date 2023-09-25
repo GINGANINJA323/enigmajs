@@ -27,9 +27,20 @@ export const reflector = (refVal: string, char: string): string => {
   return reflectorMap[char.toUpperCase()];
 };
 
-export const rotator = (array: string[], offset: number): Bindings => {
+export const rotator = (array: string[], offset: number, ringOffset: number): Bindings => {
+  // First, spin the alphabet round for the rotor's ring setting.
   const newArr = [...array];
+  const rotatedAlphabet = [...alphabet];
 
+  // Alphabet offset
+  for (let i = 0; i < offset; i++) {
+    rotatedAlphabet.pop();
+  }
+
+  const alphaPopped = rotatedAlphabet.slice(-ringOffset);
+  rotatedAlphabet.unshift(...alphaPopped);
+
+  // Rotor start position offset
   for (let i = 0; i < offset; i++) {
     newArr.pop();
   }
@@ -37,7 +48,7 @@ export const rotator = (array: string[], offset: number): Bindings => {
   const popped = array.slice(-offset);
   newArr.unshift(...popped);
 
-  return alphabet.reduce((prev, curr, index) => ({ ...prev, [curr]: newArr[index] }), {});
+  return rotatedAlphabet.reduce((prev, curr, index) => ({ ...prev, [curr]: newArr[index] }), {});
 }
 
 export const rotorFlip = (rotor: Bindings): Bindings => Object.keys(rotor).reduce((prev, curr) => ({ ...prev, [rotor[curr]]: curr }), {});
@@ -81,9 +92,9 @@ export const rotor = (char: string, reversed?: boolean): string | void => {
   }
 
   // Rotate to start positions
-  const rotor1Map = rotator(rotorSelection[rotor1.type].split(''), rotor1.pos);
-  const rotor2Map = rotator(rotorSelection[rotor2.type].split(''), rotor2.pos);
-  const rotor3Map = rotator(rotorSelection[rotor3.type].split(''), rotor3.pos);
+  const rotor1Map = rotator(rotorSelection[rotor1.type].split(''), rotor1.pos, rotor1.ringOffset);
+  const rotor2Map = rotator(rotorSelection[rotor2.type].split(''), rotor2.pos, rotor2.ringOffset);
+  const rotor3Map = rotator(rotorSelection[rotor3.type].split(''), rotor3.pos, rotor3.ringOffset);
 
   const maps = reversed ? [rotorFlip(rotor3Map), rotorFlip(rotor2Map), rotorFlip(rotor1Map)] : [rotor1Map, rotor2Map, rotor3Map];
   const outputChar = maps.reduce((prev, curr) => curr[prev], inputChar);
@@ -101,7 +112,6 @@ export const encrypt = (text: string, pairs: Bindings, rotors: string[], rStartP
   rotor3 = { type: rotors[2], pos: rStartPos[2], globalRotations: 0, ringOffset: rotor3.ringOffset };
 
   const textArray = textIn.map(char => {
-
     const plugged = substituteChar(char, pairs);
     const leftRotor = rotor(plugged);
 

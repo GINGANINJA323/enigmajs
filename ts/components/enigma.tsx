@@ -50,6 +50,8 @@ const Enigma = (): JSX.Element => {
     const refValid = reflector.length >= 1;
     const ptValid = plaintext.length > 0;
 
+    console.log('Validator: ', rotorsValid, refValid, ptValid);
+
     if (!rotorsValid || !refValid || !ptValid) {
       console.log('Validation failed.');
       return true;
