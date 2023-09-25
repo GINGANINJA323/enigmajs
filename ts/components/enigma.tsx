@@ -37,6 +37,7 @@ const Enigma = (): JSX.Element => {
   const [steckerPairs, setSteckerPairs] = React.useState({});
   const [reflector, setReflector] = React.useState('b');
   const [rotorStart, setRotorStart] = React.useState([0, 0, 0]);
+  const [rotorRing, setRotorRing] = React.useState([0, 0, 0]);
   const [rotors, setRotors] = React.useState(['I', 'II', 'III']);
   const [visibleComponent, setVisibleComponent] = React.useState('about');
 
@@ -180,6 +181,8 @@ const Enigma = (): JSX.Element => {
             onChangeRotorStart={setRotorStart}
             rotors={rotors}
             rotorStart={rotorStart}
+            rotorRing={rotorRing}
+            onChangeRotorRing={setRotorRing}
           /> :
           null
         }

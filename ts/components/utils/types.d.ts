@@ -5,7 +5,8 @@ export interface Bindings {
 export interface RotorType {
   type?: string;
   pos: number;
-  globalRotations: number
+  globalRotations: number;
+  ringOffset: number;
 }
 
 export interface EventType {

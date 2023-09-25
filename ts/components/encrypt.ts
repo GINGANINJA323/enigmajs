@@ -2,9 +2,11 @@ const { rotorSelection, reflectors } = require('./rotorSelect.json');
 import { alphabet, punctuation } from "./utils/utils";
 import { Bindings, RotorType } from './utils/types';
 
-let rotor1: RotorType = { pos: 0, globalRotations: 0 };
-let rotor2: RotorType = { pos: 0, globalRotations: 0 };
-let rotor3: RotorType = { pos: 0, globalRotations: 0 };
+// ringOffset denotes the shift in the input ring (alphabetical ring) before encryption starts
+
+let rotor1: RotorType = { pos: 0, globalRotations: 0, ringOffset: 0 };
+let rotor2: RotorType = { pos: 0, globalRotations: 0, ringOffset: 0 };
+let rotor3: RotorType = { pos: 0, globalRotations: 0, ringOffset: 0 };
 
 export const substituteChar = (char: string, plugboard: Bindings): string => {
   const upperChar = char.toUpperCase();
@@ -94,9 +96,9 @@ export const encrypt = (text: string, pairs: Bindings, rotors: string[], rStartP
 
   console.log(textIn);
 
-  rotor1 = { type: rotors[0], pos: rStartPos[0], globalRotations: 0 };
-  rotor2 = { type: rotors[1], pos: rStartPos[1], globalRotations: 0 };
-  rotor3 = { type: rotors[2], pos: rStartPos[2], globalRotations: 0 };
+  rotor1 = { type: rotors[0], pos: rStartPos[0], globalRotations: 0, ringOffset: rotor1.ringOffset };
+  rotor2 = { type: rotors[1], pos: rStartPos[1], globalRotations: 0, ringOffset: rotor2.ringOffset };
+  rotor3 = { type: rotors[2], pos: rStartPos[2], globalRotations: 0, ringOffset: rotor3.ringOffset };
 
   const textArray = textIn.map(char => {
 

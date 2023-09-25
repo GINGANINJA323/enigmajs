@@ -7,8 +7,10 @@ const { rotorSelection } = require('./rotorSelect.json');
 interface RotorConfigProps {
   rotors: string[];
   rotorStart: number[];
+  rotorRing: number[];
   onChangeRotorType: (rotors: string[]) => void;
   onChangeRotorStart: (rotorStart: number[]) => void;
+  onChangeRotorRing: (rotorRing: number[]) => void;
 }
 
 const RotorContainer = styled.div`
@@ -26,10 +28,12 @@ const Individual = styled.div`
 const RotorConfig = (props: RotorConfigProps): JSX.Element => {
   const [rotorArray, setRotorArray] = React.useState(props.rotors || ['I', 'II', 'III']);
   const [rotorStart, setRotorStart] = React.useState(props.rotorStart || [0, 0, 0]);
+  const [rotorRing, setRotorRing] = React.useState(props.rotorRing || [0, 0, 0]);
 
   const handleChangeRotors = (): void => {
     props.onChangeRotorType(rotorArray);
     props.onChangeRotorStart(rotorStart);
+    props.onChangeRotorRing(rotorRing)
   }
 
   const handleRotorChange = (value: string, pos: number): void => {
@@ -43,7 +47,7 @@ const RotorConfig = (props: RotorConfigProps): JSX.Element => {
 
   return (
     <>
-      <p>{'Select the three rotors you would like to encrypt with, as well as their respective start positions.'}</p>
+      <p>{'Select the three rotors you would like to encrypt with, as well as their respective start positions and ring settings.'}</p>
       <RotorContainer>
         <Individual>
           <Dropdown
@@ -57,6 +61,14 @@ const RotorConfig = (props: RotorConfigProps): JSX.Element => {
             max={26}
             value={rotorStart[0]}
             onChange={(e) => setRotorStart([Number(e.target.value), rotorStart[1], rotorStart[2]])}
+            onBlur={() => handleChangeRotors()}
+          />
+          <Input
+            type={'number'}
+            min={0}
+            max={26}
+            value={rotorRing[0]}
+            onChange={(e) => setRotorRing([Number(e.target.value), rotorRing[1], rotorRing[2]])}
             onBlur={() => handleChangeRotors()}
           />
         </Individual>
@@ -75,6 +87,14 @@ const RotorConfig = (props: RotorConfigProps): JSX.Element => {
             onChange={(e) => setRotorStart([rotorStart[0], Number(e.target.value), rotorStart[2]])}
             onBlur={() => handleChangeRotors()}
           />
+          <Input
+            type={'number'}
+            min={0}
+            max={26}
+            value={rotorRing[1]}
+            onChange={(e) => setRotorRing([rotorRing[0], Number(e.target.value), rotorRing[2]])}
+            onBlur={() => handleChangeRotors()}
+          />
         </Individual>
 
         <Individual>
@@ -89,6 +109,14 @@ const RotorConfig = (props: RotorConfigProps): JSX.Element => {
             max={26}
             value={rotorStart[2]}
             onChange={(e) => setRotorStart([rotorStart[0], rotorStart[1], Number(e.target.value)])}
+            onBlur={() => handleChangeRotors()}
+          />
+          <Input
+            type={'number'}
+            min={0}
+            max={26}
+            value={rotorRing[2]}
+            onChange={(e) => setRotorRing([rotorRing[0], rotorRing[1], Number(e.target.value)])}
             onBlur={() => handleChangeRotors()}
           />
         </Individual>
